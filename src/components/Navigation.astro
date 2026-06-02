@@ -45,6 +45,7 @@ const languageHref = withBase('/languages');
         class="language"
         type="button"
         aria-label={t(lang, 'common.choose_language')}
+        data-language-button
       >
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
@@ -62,6 +63,7 @@ const languageHref = withBase('/languages');
         href={`${baseUrl}/cart`}
         aria-label={t(lang, 'cart.title')}
         aria-current={currentPage === 'cart' ? 'page' : undefined}
+        data-cart-link
       >
         <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 5h2l2.1 10.2a2 2 0 0 0 2 1.6h6.8a2 2 0 0 0 1.9-1.4L21 8H7" />
@@ -74,10 +76,21 @@ const languageHref = withBase('/languages');
   </div>
 </header>
 
-<script is:inline define:vars={{ languageHref }}>
+<script is:inline define:vars={{ languageHref, currentPage }}>
   // Language selector
   const languageSelector = document.querySelector('.language');
   languageSelector?.addEventListener('click', () => {
+    window.tastyfoodAnalytics?.track('menu_anchor_click', {
+      page_type: currentPage,
+      target_section: 'languages',
+    });
     window.location.href = languageHref;
+  });
+
+  document.querySelector('[data-cart-link]')?.addEventListener('click', () => {
+    window.tastyfoodAnalytics?.track('menu_anchor_click', {
+      page_type: currentPage,
+      target_section: 'cart',
+    });
   });
 </script>

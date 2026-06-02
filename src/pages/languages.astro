@@ -47,7 +47,12 @@ const options = [
 
       <nav class="language-list" aria-label="Languages">
         {options.map(option => (
-          <a class="language-option" href={option.href} data-language-link>
+          <a
+            class="language-option"
+            href={option.href}
+            data-language-link
+            data-language-code={option.code.toLowerCase()}
+          >
             <span>
               <strong>{option.name}</strong>
               <small>{option.intro}</small>
@@ -64,6 +69,12 @@ const options = [
   // Clear cart when selecting a new language
   document.querySelectorAll('[data-language-link]').forEach(link => {
     link.addEventListener('click', () => {
+      window.tastyfoodAnalytics.track('language_change', {
+        page_type: 'language',
+        from_language: document.documentElement.lang || 'en',
+        to_language: link.getAttribute('data-language-code') || 'unknown',
+      });
+
       if (window.tastyfoodCart) {
         window.tastyfoodCart.write([]);
       }

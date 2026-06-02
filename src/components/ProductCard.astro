@@ -15,6 +15,7 @@ interface Props {
   image: MenuItem['image'];
   imageUrl: string;
   href: string;
+  categoryId: string;
   categories?: string[];
   badge?: 'hit' | 'new';
   allergens: string[];
@@ -34,6 +35,7 @@ const {
   image,
   imageUrl,
   href,
+  categoryId,
   categories = [],
   badge,
   allergens,
@@ -138,6 +140,8 @@ const meta = [
         data-cart-button
         data-product-id={id}
         data-product-name={name}
+        data-product-category={categoryId}
+        data-product-variant={`${weight} g`}
         data-product-price={price.value}
         data-product-currency={price.currency}
         data-product-image={imageUrl}

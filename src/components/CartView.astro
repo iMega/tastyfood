@@ -121,6 +121,7 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
   const minPies = 3;
 
   let currentOrderText = '';
+  let didTrackViewCart = false;
 
   const formatPrice = (value, currency = 'EUR') => {
     return new Intl.NumberFormat(locale, {
@@ -135,6 +136,15 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
   const writeCart = cart => {
     api.write(cart);
     render();
+  };
+
+  const trackCartOpen = cart => {
+    if (didTrackViewCart) {
+      return;
+    }
+
+    window.tastyfoodAnalytics.viewCart(cart);
+    didTrackViewCart = true;
   };
 
   const render = () => {
@@ -162,6 +172,8 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
       node.querySelector('[data-cart-item-price]').textContent = formatPrice(price, currency);
       node.querySelector('[data-cart-item-quantity]').textContent = quantity;
       node.querySelector('[data-cart-decrease]').addEventListener('click', () => {
+        window.tastyfoodAnalytics.removeFromCart(item, 1, 'cart');
+
         const next = cart
           .map(entry => entry.id === item.id
             ? { ...entry, quantity: entry.quantity - 1 }
@@ -170,6 +182,8 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
         writeCart(next);
       });
       node.querySelector('[data-cart-increase]').addEventListener('click', () => {
+        window.tastyfoodAnalytics.addToCart(item, 'cart');
+
         const next = cart.map(entry => entry.id === item.id
           ? { ...entry, quantity: entry.quantity + 1 }
           : entry);
@@ -191,11 +205,28 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
     if (submitButton) {
       submitButton.disabled = totalQuantity < minPies;
     }
+
+    trackCartOpen(cart);
   };
 
   // Handle form submission - combine all data into message field and clear cart
   if (form) {
+    form.addEventListener('invalid', event => {
+      const target = event.target;
+      const fieldName = target instanceof HTMLInputElement
+        || target instanceof HTMLTextAreaElement
+        ? target.placeholder || target.name || 'unknown'
+        : 'unknown';
+
+      window.tastyfoodAnalytics.track('checkout_error', {
+        page_type: 'cart',
+        error_type: 'invalid_field',
+        field_name: fieldName,
+      });
+    }, true);
+
     form.addEventListener('submit', (e) => {
+      const cart = api.read();
       const userName = userNameField?.value.trim() || '';
       const userPhone = userPhoneField?.value.trim() || '';
       const userEmail = userEmailField?.value.trim() || '';
@@ -219,6 +250,9 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
       if (finalMessageField) {
         finalMessageField.value = messageParts.join('\n');
       }
+
+      window.tastyfoodAnalytics.beginCheckout(cart);
+      window.tastyfoodAnalytics.submitOrder(cart);
 
       // Clear cart after form submission
       api.write([]);

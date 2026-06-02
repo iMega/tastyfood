@@ -12,6 +12,7 @@ interface Props {
   name: string;
   image: MenuItem['image'];
   imageUrl: string;
+  categoryId: string;
   price: ProductPrice;
   weight: number;
   locale: Language;
@@ -23,6 +24,7 @@ const {
   name,
   image,
   imageUrl,
+  categoryId,
   price,
   weight,
   locale,
@@ -88,6 +90,8 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
             data-product-detail-add
             data-product-id={id}
             data-product-name={name}
+            data-product-category={categoryId}
+            data-product-variant={`${weight} g`}
             data-product-price={price.value}
             data-product-currency={price.currency}
             data-product-image={imageUrl}
@@ -163,6 +167,25 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
 
 <script>
   const mobileDetailsQuery = window.matchMedia('(max-width: 56.25rem)');
+  const productButton = document.querySelector('[data-product-detail-add]');
+
+  if (productButton) {
+    const product = window.tastyfoodAnalytics.productFrom(productButton);
+
+    window.tastyfoodAnalytics.track('view_item', {
+      page_type: 'product',
+      currency: product.currency,
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        item_category: product.category,
+        item_variant: product.variant,
+        price: product.price,
+        quantity: 1,
+      }],
+    });
+  }
   const syncProductDetailsAccordions = () => {
     const isMobile = mobileDetailsQuery.matches;
 
@@ -205,12 +228,9 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
       return;
     }
 
-    window.tastyfoodCart.add({
-      id: button.getAttribute('data-product-id'),
-      name: button.getAttribute('data-product-name'),
-      price: Number(button.getAttribute('data-product-price')),
-      currency: button.getAttribute('data-product-currency') || 'EUR',
-      image: button.getAttribute('data-product-image'),
-    });
+    window.tastyfoodCart.add(
+      window.tastyfoodAnalytics.productFrom(button),
+      'product'
+    );
   });
 </script>

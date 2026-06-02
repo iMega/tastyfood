@@ -1,8 +1,11 @@
+import './analytics';
 import { order } from '../lib/order';
 
 type CartItem = {
   id: string;
   name: string;
+  category?: string | null;
+  variant?: string | null;
   price: number;
   currency: string;
   image: string | null;
@@ -18,7 +21,7 @@ declare global {
       maxPies: number;
       read: () => CartItem[];
       write: (cart: CartItem[]) => void;
-      add: (product: Product) => void;
+      add: (product: Product, source?: string) => void;
       updateCount: () => void;
     };
   }
@@ -77,7 +80,7 @@ const writeCart = (cart: CartItem[]) => {
   }));
 };
 
-const addCartItem = (product: Product) => {
+const addCartItem = (product: Product, source = 'unknown') => {
   const cart = readCart();
   const count = totalQuantity(cart);
 
@@ -94,6 +97,7 @@ const addCartItem = (product: Product) => {
   }
 
   writeCart(cart);
+  window.tastyfoodAnalytics.addToCart(product, source);
 };
 
 window.tastyfoodCart = {

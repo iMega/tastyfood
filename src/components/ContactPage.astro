@@ -26,14 +26,28 @@ const hours = `${label('hours_prefix')}, ${common.hours}`;
         <h1>{title}</h1>
         <p class="product-hero__intro">{label('intro')}</p>
 
-        <a class="contact-phone" href={common.phoneHref}>{common.phone}</a>
+        <a
+          class="contact-phone"
+          href={common.phoneHref}
+          data-contact-link
+          data-contact-type="phone"
+          data-source-section="contact"
+        >
+          {common.phone}
+        </a>
 
         <div class="contact-details">
           <p>{hours}</p>
           <p>{common.address}</p>
         </div>
 
-        <a class="product-hero__cart contact-page__call" href={common.phoneHref}>
+        <a
+          class="product-hero__cart contact-page__call"
+          href={common.phoneHref}
+          data-contact-link
+          data-contact-type="phone"
+          data-source-section="contact"
+        >
           {label('call')}
         </a>
       </div>
@@ -101,5 +115,15 @@ const hours = `${label('hours_prefix')}, ${common.hours}`;
     if (summary.parentElement instanceof HTMLDetailsElement) {
       summary.parentElement.open = true;
     }
+  });
+
+  document.querySelectorAll('[data-contact-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      window.tastyfoodAnalytics.track('contact_click', {
+        page_type: 'contact',
+        contact_type: link.getAttribute('data-contact-type') || 'phone',
+        source_section: link.getAttribute('data-source-section') || 'contact',
+      });
+    });
   });
 </script>
