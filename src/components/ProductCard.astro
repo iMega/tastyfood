@@ -1,6 +1,7 @@
 ---
+import { Picture } from 'astro:assets';
 import { t, type Language } from '../lib/i18n';
-import type { ProductPrice } from '../lib/menu';
+import type { MenuItem, ProductPrice } from '../lib/menu';
 
 interface Props {
   id: string;
@@ -11,11 +12,14 @@ interface Props {
   price: ProductPrice;
   weight: number;
   portions: number;
-  image: string;
+  image: MenuItem['image'];
+  imageUrl: string;
   href: string;
   categories?: string[];
   badge?: 'hit' | 'new';
   allergens: string[];
+  imageLoading?: 'eager' | 'lazy';
+  imageFetchPriority?: 'high' | 'low' | 'auto';
 }
 
 const {
@@ -28,10 +32,13 @@ const {
   weight,
   portions,
   image,
+  imageUrl,
   href,
   categories = [],
   badge,
   allergens,
+  imageLoading = 'lazy',
+  imageFetchPriority,
 } = Astro.props;
 
 const formatPrice = (price: ProductPrice, locale: Language): string => {
@@ -91,7 +98,18 @@ const meta = [
   )}
 
   <a href={href} class="product-image-link" aria-label={name}>
-    <img src={image} alt={name} class="product-image" loading="eager" decoding="async" />
+    <Picture
+      src={image}
+      alt={name}
+      class="product-image"
+      formats={['webp']}
+      fallbackFormat="png"
+      widths={[320, 480, 640, 960]}
+      sizes="(max-width: 520px) 100vw, (max-width: 1024px) 50vw, 33vw"
+      loading={imageLoading}
+      fetchpriority={imageFetchPriority}
+      decoding="async"
+    />
   </a>
 
   <div class="product-info">
@@ -122,7 +140,7 @@ const meta = [
         data-product-name={name}
         data-product-price={price.value}
         data-product-currency={price.currency}
-        data-product-image={image}
+        data-product-image={imageUrl}
       >
         <span class="add-icon" data-cart-button-label>+</span>
       </button>

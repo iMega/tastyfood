@@ -47,7 +47,7 @@ const categories = [...getCategories()].sort((a, b) => a.order - b.order);
       </div>
 
       <div class="products-grid">
-        {menuItems.map(item => {
+        {menuItems.map((item, index) => {
           const product = getLocalizedMenuItem(item, lang);
 
           return (
@@ -62,9 +62,12 @@ const categories = [...getCategories()].sort((a, b) => a.order - b.order);
               weight={item.weight}
               portions={item.portions}
               image={item.image}
+              imageUrl={item.imageUrl}
               href={withBase(`/${lang}/products/${item.id}`)}
               categories={item.categories}
               badge={item.badge}
+              imageLoading={index < 3 ? 'eager' : 'lazy'}
+              imageFetchPriority={index === 0 ? 'high' : undefined}
             />
           );
         })}

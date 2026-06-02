@@ -1,11 +1,17 @@
 import type { Language } from './i18n';
+import type { ImageMetadata } from 'astro';
 import categories from '../data/menu/categories.json';
 
-const imageFiles = import.meta.glob<string>('../assets/images/*', {
+const imageFiles = import.meta.glob<ImageMetadata>('../assets/images/*', {
   eager: true,
   import: 'default',
-  query: '?url',
 });
+
+type ProductImage = ImageMetadata | string;
+
+type MenuItemFile = Omit<MenuItem, 'image' | 'imageUrl'> & {
+  image: string;
+};
 
 export interface MenuItem {
   id: string;
@@ -15,7 +21,8 @@ export interface MenuItem {
   price: ProductPrice;
   weight: number;
   portions: number;
-  image: string;
+  image: ProductImage;
+  imageUrl: string;
   available: boolean;
   badge?: 'hit' | 'new';
   allergens?: string[];
@@ -67,23 +74,31 @@ export async function getMenuItems(): Promise<MenuItem[]> {
   const items: MenuItem[] = [];
 
   for (const path in itemFiles) {
-    const item = await itemFiles[path]() as { default: MenuItem };
+    const item = await itemFiles[path]() as { default: MenuItemFile };
+    const image = resolveImage(item.default.image);
+
     items.push({
       ...item.default,
-      image: resolveImage(item.default.image),
+      ...image,
     });
   }
 
   return items.sort((a, b) => a.order - b.order);
 }
 
-function resolveImage(image: string): string {
+function resolveImage(image: string): {
+  image: ProductImage;
+  imageUrl: string;
+} {
   const filename = image.split('/').pop();
   const match = Object.entries(imageFiles).find(([path]) => {
     return path.endsWith(`/${filename}`);
   });
 
-  return match?.[1] || image;
+  return {
+    image: match?.[1] || image,
+    imageUrl: match?.[1]?.src || image,
+  };
 }
 
 export function getCategories(): Category[] {

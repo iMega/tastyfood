@@ -1,18 +1,33 @@
 ---
+import { Picture } from 'astro:assets';
 import { t, type Language } from '../lib/i18n';
-import type { ProductDetails, ProductPrice } from '../lib/menu';
+import type {
+  MenuItem,
+  ProductDetails,
+  ProductPrice,
+} from '../lib/menu';
 
 interface Props {
   id: string;
   name: string;
-  image: string;
+  image: MenuItem['image'];
+  imageUrl: string;
   price: ProductPrice;
   weight: number;
   locale: Language;
   details: ProductDetails;
 }
 
-const { id, name, image, price, weight, locale, details } = Astro.props;
+const {
+  id,
+  name,
+  image,
+  imageUrl,
+  price,
+  weight,
+  locale,
+  details,
+} = Astro.props;
 
 const formattedPrice = new Intl.NumberFormat(locale, {
   style: 'currency',
@@ -42,7 +57,18 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
 <main class="main">
   <article class="product-page">
     <div class="product-hero">
-      <img src={image} alt={name} class="product-hero__image" />
+      <Picture
+        src={image}
+        alt={name}
+        class="product-hero__image"
+        formats={['webp']}
+        fallbackFormat="png"
+        widths={[640, 960, 1280, 1600, 1916]}
+        sizes="(max-width: 900px) calc(100vw - 40px), 560px"
+        loading="eager"
+        fetchpriority="high"
+        decoding="async"
+      />
       <div class="product-hero__content">
         <h1>{name}</h1>
         <p class="product-hero__intro">{details.intro}</p>
@@ -64,7 +90,7 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
             data-product-name={name}
             data-product-price={price.value}
             data-product-currency={price.currency}
-            data-product-image={image}
+            data-product-image={imageUrl}
           >
             {label('add_to_cart')}
           </button>
