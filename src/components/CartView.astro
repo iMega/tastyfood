@@ -1,0 +1,229 @@
+---
+import { t, type Language } from '../lib/i18n';
+import { contact } from '../lib/contact';
+import { order } from '../lib/order';
+import { config } from '../lib/config';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const redirectUrl = `${config.siteUrl}/${lang}/thank-you/`;
+---
+
+<main class="main">
+  <section class="cart-page">
+    <h1 class="cart-title">{t(lang, 'cart.title')}</h1>
+
+    <div class="cart-shell">
+      <div class="cart-items">
+        <div class="cart-list" data-cart-list></div>
+
+        <div class="cart-empty" data-cart-empty hidden>
+          <p class="cart-empty__title">{t(lang, 'cart.empty')}</p>
+          <p class="cart-empty__text">{t(lang, 'cart.empty_message')}</p>
+          <a href={`/${lang}/`} class="cart-empty__button">{t(lang, 'cart.back_to_menu')}</a>
+        </div>
+      </div>
+
+      <aside class="cart-summary" data-cart-summary hidden>
+        <div class="cart-summary__total">
+          <strong>{t(lang, 'cart.total')}</strong>
+          <strong data-cart-total>€0</strong>
+        </div>
+
+        <div class="cart-summary__info">
+          <p class="cart-summary__min-order">{t(lang, 'cart.min_order_note')}</p>
+          <p>{t(lang, 'cart.pickup_at')} {contact.address}</p>
+        </div>
+
+        <form class="cart-form" data-cart-form action="https://api.staticforms.dev/submit" method="POST">
+          <input type="hidden" name="accessKey" value="sf_5ab3ef599da9957fd0048681">
+          <input type="hidden" name="redirectTo" value={redirectUrl}>
+          <input type="hidden" name="subject" value="New order from Tastyfood">
+          <input type="hidden" name="replyTo" value="@">
+          <input type="hidden" name="message" data-final-message>
+
+          <input
+            type="text"
+            class="cart-form__input"
+            data-user-name
+            placeholder={t(lang, 'cart.order_form.name')}
+            required
+          />
+
+          <input
+            type="tel"
+            class="cart-form__input"
+            data-user-phone
+            placeholder={t(lang, 'cart.order_form.phone')}
+            pattern="^\\\+?[0-9]{1,17}$"
+            required
+          />
+
+          <input
+            type="email"
+            name="email"
+            class="cart-form__input"
+            data-user-email
+            placeholder={t(lang, 'cart.order_form.email')}
+          />
+
+          <textarea
+            class="cart-form__textarea"
+            data-user-comment
+            placeholder={t(lang, 'cart.order_form.message')}
+            rows="3"
+          ></textarea>
+
+          <button type="submit" class="cart-form__submit" data-submit-button>
+            {t(lang, 'cart.order_form.submit')}
+          </button>
+        </form>
+
+        <p class="cart-summary__note">{t(lang, 'cart.confirmation_note')}</p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<template data-cart-item-template>
+  <article class="cart-item">
+    <img class="cart-item__image" alt="" data-cart-item-image />
+    <div class="cart-item__info">
+      <h3 class="cart-item__name" data-cart-item-name></h3>
+      <p class="cart-item__price" data-cart-item-price></p>
+    </div>
+    <div class="cart-item__controls">
+      <button type="button" class="cart-item__btn" data-cart-decrease aria-label="Decrease">-</button>
+      <span class="cart-item__quantity" data-cart-item-quantity></span>
+      <button type="button" class="cart-item__btn" data-cart-increase aria-label="Increase">+</button>
+    </div>
+  </article>
+</template>
+
+<script>
+  const api = window.tastyfoodCart;
+  const list = document.querySelector('[data-cart-list]');
+  const empty = document.querySelector('[data-cart-empty]');
+  const summary = document.querySelector('[data-cart-summary]');
+  const total = document.querySelector('[data-cart-total]');
+  const form = document.querySelector('[data-cart-form]');
+  const submitButton = document.querySelector('[data-submit-button]');
+  const finalMessageField = document.querySelector('[data-final-message]');
+  const userNameField = document.querySelector('[data-user-name]');
+  const userPhoneField = document.querySelector('[data-user-phone]');
+  const userEmailField = document.querySelector('[data-user-email]');
+  const userCommentField = document.querySelector('[data-user-comment]');
+  const template = document.querySelector('[data-cart-item-template]');
+  const locale = document.documentElement.lang || 'en';
+  const minPies = 3;
+
+  let currentOrderText = '';
+
+  const formatPrice = (value, currency = 'EUR') => {
+    return new Intl.NumberFormat(locale, {
+      style: 'currency',
+      currency,
+      currencyDisplay: 'narrowSymbol',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    }).format(value);
+  };
+
+  const writeCart = cart => {
+    api.write(cart);
+    render();
+  };
+
+  const render = () => {
+    const cart = api.read();
+    list.replaceChildren();
+
+    const hasItems = cart.length > 0;
+    empty.hidden = hasItems;
+    summary.hidden = !hasItems;
+
+    let sum = 0;
+    let totalQuantity = 0;
+
+    cart.forEach(item => {
+      const node = template.content.cloneNode(true);
+      const price = Number(item.price || 0);
+      const currency = item.currency || 'EUR';
+      const quantity = Number(item.quantity || 0);
+      sum += price * quantity;
+      totalQuantity += quantity;
+
+      node.querySelector('[data-cart-item-image]').src = item.image;
+      node.querySelector('[data-cart-item-image]').alt = item.name;
+      node.querySelector('[data-cart-item-name]').textContent = item.name;
+      node.querySelector('[data-cart-item-price]').textContent = formatPrice(price, currency);
+      node.querySelector('[data-cart-item-quantity]').textContent = quantity;
+      node.querySelector('[data-cart-decrease]').addEventListener('click', () => {
+        const next = cart
+          .map(entry => entry.id === item.id
+            ? { ...entry, quantity: entry.quantity - 1 }
+            : entry)
+          .filter(entry => entry.quantity > 0);
+        writeCart(next);
+      });
+      node.querySelector('[data-cart-increase]').addEventListener('click', () => {
+        const next = cart.map(entry => entry.id === item.id
+          ? { ...entry, quantity: entry.quantity + 1 }
+          : entry);
+        writeCart(next);
+      });
+
+      list.append(node);
+    });
+
+    total.textContent = formatPrice(sum);
+
+    // Store order details for form submission
+    const orderText = cart.map(item =>
+      `${item.name} x ${item.quantity} — ${formatPrice(item.price * item.quantity, item.currency)}`
+    ).join('\n');
+    currentOrderText = `ORDER:\n${orderText}\n\nTOTAL: ${formatPrice(sum)}`;
+
+    // Enable/disable submit button based on minimum order
+    if (submitButton) {
+      submitButton.disabled = totalQuantity < minPies;
+    }
+  };
+
+  // Handle form submission - combine all data into message field and clear cart
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      const userName = userNameField?.value.trim() || '';
+      const userPhone = userPhoneField?.value.trim() || '';
+      const userEmail = userEmailField?.value.trim() || '';
+      const userComment = userCommentField?.value.trim() || '';
+
+      const messageParts = [
+        currentOrderText,
+        '',
+        `NAME: ${userName}`,
+        `PHONE: ${userPhone}`,
+      ];
+
+      if (userEmail) {
+        messageParts.push(`EMAIL: ${userEmail}`);
+      }
+
+      if (userComment) {
+        messageParts.push('', `COMMENT: ${userComment}`);
+      }
+
+      if (finalMessageField) {
+        finalMessageField.value = messageParts.join('\n');
+      }
+
+      // Clear cart after form submission
+      api.write([]);
+    });
+  }
+
+  render();
+</script>

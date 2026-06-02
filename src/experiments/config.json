@@ -1,0 +1,40 @@
+{
+  "experiments": [
+    {
+      "id": "menu-layout",
+      "name": "Menu Layout Test",
+      "description": "Testing different menu layouts",
+      "enabled": true,
+      "variants": [
+        {
+          "id": "grid",
+          "name": "Grid Layout",
+          "weight": 50
+        },
+        {
+          "id": "list",
+          "name": "List Layout",
+          "weight": 50
+        }
+      ]
+    },
+    {
+      "id": "cta-button",
+      "name": "CTA Button Test",
+      "description": "Testing different call-to-action button styles",
+      "enabled": true,
+      "variants": [
+        {
+          "id": "primary",
+          "name": "Primary Button",
+          "weight": 50
+        },
+        {
+          "id": "outlined",
+          "name": "Outlined Button",
+          "weight": 50
+        }
+      ]
+    }
+  ]
+}

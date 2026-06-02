@@ -1,0 +1,13 @@
+---
+import CartView from '../../components/CartView.astro';
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { defaultLanguage, t } from '../../lib/i18n';
+
+const lang = defaultLanguage;
+---
+
+<Layout lang={lang} title={`${t(lang, 'cart.title')} - Tastyfood`} alternatePath={false}>
+  <Navigation lang={lang} currentPage="cart" />
+  <CartView lang={lang} />
+</Layout>

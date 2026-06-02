@@ -1,0 +1,17 @@
+---
+import { contact as common } from '../lib/contact';
+import type { Language } from '../lib/i18n';
+
+interface Props {
+  lang?: Language;
+}
+
+const { lang = 'en' } = Astro.props;
+---
+
+<footer class="site-footer">
+  <div class="footer-wrapper">
+    <a class="footer-address" href={`/${lang}/contact`}>{common.address}</a>
+    <a class="footer-phone" href={common.phoneHref}>{common.phone}</a>
+  </div>
+</footer>

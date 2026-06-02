@@ -1,0 +1,190 @@
+---
+import { t, type Language } from '../lib/i18n';
+import type { ProductDetails, ProductPrice } from '../lib/menu';
+
+interface Props {
+  id: string;
+  name: string;
+  image: string;
+  price: ProductPrice;
+  weight: number;
+  locale: Language;
+  details: ProductDetails;
+}
+
+const { id, name, image, price, weight, locale, details } = Astro.props;
+
+const formattedPrice = new Intl.NumberFormat(locale, {
+  style: 'currency',
+  currency: price.currency,
+  currencyDisplay: 'narrowSymbol',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 2,
+}).format(price.value);
+
+const wholeWeight = new Intl.NumberFormat(locale, {
+  style: 'unit',
+  unit: weight >= 1000 ? 'kilogram' : 'gram',
+  unitDisplay: 'short',
+  maximumFractionDigits: 1,
+}).format(weight >= 1000 ? weight / 1000 : weight);
+const wholePrice = formattedPrice;
+
+const summaryItems = [
+  wholeWeight,
+  details.allergens.length > 0 ? details.allergens.join(', ') : undefined,
+].filter(Boolean);
+
+const label = (key: string) => t(locale, `product_details.${key}`);
+const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
+---
+
+<main class="main">
+  <article class="product-page">
+    <div class="product-hero">
+      <img src={image} alt={name} class="product-hero__image" />
+      <div class="product-hero__content">
+        <h1>{name}</h1>
+        <p class="product-hero__intro">{details.intro}</p>
+        <ul class="product-hero__facts" aria-label={label('summary')}>
+          {summaryItems.map(item => <li>{item}</li>)}
+        </ul>
+        <div class="product-hero__buy">
+          <div>
+            <span class="product-hero__price">{wholePrice}</span>
+            <span class="product-hero__piece">
+              {label('whole_pie')} — {wholeWeight}
+            </span>
+          </div>
+          <button
+            type="button"
+            class="product-hero__cart"
+            data-product-detail-add
+            data-product-id={id}
+            data-product-name={name}
+            data-product-price={price.value}
+            data-product-currency={price.currency}
+            data-product-image={image}
+          >
+            {label('add_to_cart')}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <section class="product-details-card">
+      <div class="product-details-card__grid">
+        <div class="product-details-card__column">
+          <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible data-mobile-open open>
+            <summary>{label('composition')}</summary>
+            <p><strong>{label('filling')}:</strong> {details.filling.join(', ')}.</p>
+            <p><strong>{label('dough')}:</strong> {details.dough.join(', ')}.</p>
+          </details>
+
+          <div class="product-details-card__section">
+            <h2>{label('weight_and_price')}</h2>
+            <dl>
+              {wholeWeight && (
+                <>
+                  <dt>{label('whole_pie')}</dt>
+                  <dd>{wholeWeight} · {wholePrice}</dd>
+                </>
+              )}
+            </dl>
+          </div>
+        </div>
+
+        <div class="product-details-card__column">
+          <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
+            <summary>{label('nutrition')}</summary>
+            <dl>
+              {details.nutrition.map(item => (
+                <>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </>
+              ))}
+            </dl>
+          </details>
+
+          <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
+            <summary>{label('allergens')}</summary>
+            <p>{allergenText}.</p>
+          </details>
+        </div>
+      </div>
+
+      <details class="product-details-card__section product-details-card__section--wide product-details-card__accordion" data-mobile-collapsible open>
+        <summary>{label('storage_and_serving')}</summary>
+        <h3 class="product-details-card__subheading">{label('storage')}</h3>
+        {details.storage.map(item => <p>{item}.</p>)}
+        <h3 class="product-details-card__subheading">{label('reheating')}</h3>
+        {details.reheating.map(item => <p>{item}.</p>)}
+        {details.packaging && (
+          <p class="product-details-card__muted">{details.packaging}</p>
+        )}
+      </details>
+
+      <div class="product-details-card__note">
+        <p>{details.note}</p>
+        {details.productionDate && (
+          <p>{label('production_date')}: {details.productionDate}</p>
+        )}
+      </div>
+    </section>
+  </article>
+</main>
+
+<script>
+  const mobileDetailsQuery = window.matchMedia('(max-width: 56.25rem)');
+  const syncProductDetailsAccordions = () => {
+    const isMobile = mobileDetailsQuery.matches;
+
+    document.querySelectorAll('[data-mobile-collapsible]').forEach(item => {
+      if (!(item instanceof HTMLDetailsElement)) {
+        return;
+      }
+
+      item.open = isMobile ? item.hasAttribute('data-mobile-open') : true;
+    });
+  };
+
+  syncProductDetailsAccordions();
+  mobileDetailsQuery.addEventListener('change', syncProductDetailsAccordions);
+
+  document.addEventListener('click', event => {
+    const target = event.target;
+    const summary = target instanceof Element
+      ? target.closest('[data-mobile-collapsible] > summary')
+      : null;
+
+    if (!summary || mobileDetailsQuery.matches) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (summary.parentElement instanceof HTMLDetailsElement) {
+      summary.parentElement.open = true;
+    }
+  });
+
+  document.addEventListener('click', event => {
+    const target = event.target;
+    const button = target instanceof Element
+      ? target.closest('[data-product-detail-add]')
+      : null;
+
+    if (!(button instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    window.tastyfoodCart.add({
+      id: button.getAttribute('data-product-id'),
+      name: button.getAttribute('data-product-name'),
+      price: Number(button.getAttribute('data-product-price')),
+      currency: button.getAttribute('data-product-currency') || 'EUR',
+      image: button.getAttribute('data-product-image'),
+    });
+  });
+</script>

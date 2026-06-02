@@ -1,0 +1,286 @@
+{
+  "id": "chicken-cheese-tomato-mushrooms",
+  "order": 9,
+  "categoryId": "chicken",
+  "categories": [
+    "chicken"
+  ],
+  "price": {
+    "value": 21,
+    "currency": "EUR"
+  },
+  "weight": 800,
+  "portions": 8,
+  "image": "/images/chicken-cheese-tomato-mushrooms.png",
+  "available": true,
+  "translations": {
+    "en": {
+      "name": "Pie with Chicken, Cheese, Tomatoes and Mushrooms",
+      "description": "Dough, chicken fillet, cheese, tomatoes, champignons, spices, garlic. Allergens: gluten, dairy. Storage: +2...+6°C. Shelf life: up to 48 hours.",
+      "shortName": "Chicken, Cheese, Tomatoes and Mushrooms",
+      "cardDescription": "Chicken fillet, cheese, tomatoes, champignons, spices and garlic.",
+      "details": {
+        "intro": "Thin dough, a generous filling and a soft spice aroma. Available as a whole pie baked to order.",
+        "dough": [
+          "wheat flour",
+          "water",
+          "vegetable oil",
+          "yeast",
+          "salt",
+          "sugar"
+        ],
+        "filling": [
+          "chicken fillet",
+          "cheese",
+          "tomatoes",
+          "champignons",
+          "spices",
+          "garlic"
+        ],
+        "nutrition": [
+          {
+            "label": "Protein",
+            "value": "12 g"
+          },
+          {
+            "label": "Fat",
+            "value": "10 g"
+          },
+          {
+            "label": "Carbohydrates",
+            "value": "24 g"
+          },
+          {
+            "label": "Calories",
+            "value": "~230 kcal"
+          }
+        ],
+        "allergens": [
+          "gluten",
+          "dairy"
+        ],
+        "traces": [],
+        "storage": [
+          "Store at +2°C to +6°C",
+          "After opening, consume within 24 hours",
+          "Do not keep at room temperature for more than 2 hours"
+        ],
+        "shelfLife": "up to 48 hours",
+        "reheating": [
+          "Oven: 160°C, 6-8 minutes",
+          "Pan: low heat under a lid",
+          "Microwave: 30-60 seconds"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "lunch",
+          "shared dinner for 3-4 people"
+        ],
+        "note": "This product is handmade. Appearance and weight may vary slightly."
+      }
+    },
+    "ru": {
+      "name": "Пирог с курицей, сыром, помидорами и грибами",
+      "description": "Состав: тесто, куриное филе, сыр, помидоры, шампиньоны, специи, чеснок. Аллергены: глютен, молочные продукты. Хранение: при температуре +2...+6°C. Срок годности: до 48 часов.",
+      "shortName": "Курица, сыр, помидоры и грибы",
+      "cardDescription": "Куриное филе, сыр, помидоры, шампиньоны, специи и чеснок.",
+      "details": {
+        "intro": "Тонкое тесто, плотная начинка и мягкий вкус специй. Пирог доступен целиком и готовится на заказ.",
+        "dough": [
+          "пшеничная мука",
+          "вода",
+          "растительное масло",
+          "дрожжи",
+          "соль",
+          "сахар"
+        ],
+        "filling": [
+          "куриное филе",
+          "сыр",
+          "помидоры",
+          "шампиньоны",
+          "специи",
+          "чеснок"
+        ],
+        "nutrition": [
+          {
+            "label": "Белки",
+            "value": "12 г"
+          },
+          {
+            "label": "Жиры",
+            "value": "10 г"
+          },
+          {
+            "label": "Углеводы",
+            "value": "24 г"
+          },
+          {
+            "label": "Калорийность",
+            "value": "~230 ккал"
+          }
+        ],
+        "allergens": [
+          "глютен",
+          "молочные продукты"
+        ],
+        "traces": [],
+        "storage": [
+          "Хранить при температуре от +2°C до +6°C",
+          "После вскрытия употребить в течение 24 часов",
+          "Не оставлять при комнатной температуре более 2 часов"
+        ],
+        "shelfLife": "до 48 часов",
+        "reheating": [
+          "Духовка: 160°C, 6-8 минут",
+          "Сковорода: слабый огонь под крышкой",
+          "Микроволновка: 30-60 секунд"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "обеда",
+          "совместного ужина на 3-4 человек"
+        ],
+        "note": "Продукт готовится вручную. Внешний вид и вес могут незначительно отличаться."
+      }
+    },
+    "el": {
+      "name": "Πίτα με κοτόπουλο, τυρί, ντομάτες και μανιτάρια",
+      "description": "Ζύμη, φιλέτο κοτόπουλου, τυρί, ντομάτες, μανιτάρια, μπαχαρικά, σκόρδο. Αλλεργιογόνα: γλουτένη, γαλακτοκομικά. Φύλαξη: +2...+6°C. Διάρκεια ζωής: έως 48 ώρες.",
+      "shortName": "Κοτόπουλο, τυρί, ντομάτες και μανιτάρια",
+      "cardDescription": "Φιλέτο κοτόπουλου, τυρί, ντομάτες, μανιτάρια, μπαχαρικά και σκόρδο.",
+      "details": {
+        "intro": "Λεπτή ζύμη, πλούσια γέμιση και διακριτικό άρωμα μπαχαρικών. Διατίθεται ολόκληρη πίτα κατόπιν παραγγελίας.",
+        "dough": [
+          "αλεύρι σίτου",
+          "νερό",
+          "φυτικό λάδι",
+          "μαγιά",
+          "αλάτι",
+          "ζάχαρη"
+        ],
+        "filling": [
+          "φιλέτο κοτόπουλου",
+          "τυρί",
+          "ντομάτες",
+          "μανιτάρια",
+          "μπαχαρικά",
+          "σκόρδο"
+        ],
+        "nutrition": [
+          {
+            "label": "Πρωτεΐνες",
+            "value": "12 g"
+          },
+          {
+            "label": "Λιπαρά",
+            "value": "10 g"
+          },
+          {
+            "label": "Υδατάνθρακες",
+            "value": "24 g"
+          },
+          {
+            "label": "Θερμίδες",
+            "value": "~230 kcal"
+          }
+        ],
+        "allergens": [
+          "γλουτένη",
+          "γαλακτοκομικά"
+        ],
+        "traces": [],
+        "storage": [
+          "Φυλάσσεται σε θερμοκρασία από +2°C έως +6°C",
+          "Μετά το άνοιγμα καταναλώστε εντός 24 ωρών",
+          "Μην αφήνετε σε θερμοκρασία δωματίου πάνω από 2 ώρες"
+        ],
+        "shelfLife": "έως 48 ώρες",
+        "reheating": [
+          "Φούρνος: 160°C, 6-8 λεπτά",
+          "Τηγάνι: χαμηλή φωτιά με καπάκι",
+          "Φούρνος μικροκυμάτων: 30-60 δευτερόλεπτα"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "μεσημεριανό",
+          "δείπνο για 3-4 άτομα"
+        ],
+        "note": "Το προϊόν παρασκευάζεται χειροποίητα. Η εμφάνιση και το βάρος μπορεί να διαφέρουν ελαφρώς."
+      }
+    },
+    "uk": {
+      "name": "Пиріг з куркою, сиром, помідорами і грибами",
+      "description": "Склад: тісто, куряче філе, сир, помідори, печериці, спеції, часник. Алергени: глютен, молочні продукти. Зберігання: за температури +2...+6°C. Термін придатності: до 48 годин.",
+      "shortName": "Курка, сир, помідори і гриби",
+      "cardDescription": "Куряче філе, сир, помідори, печериці, спеції і часник.",
+      "details": {
+        "intro": "Тонке тісто, щедра начинка і мʼякий аромат спецій. Пиріг доступний цілим і готується на замовлення.",
+        "dough": [
+          "пшеничне борошно",
+          "вода",
+          "рослинна олія",
+          "дріжджі",
+          "сіль",
+          "цукор"
+        ],
+        "filling": [
+          "куряче філе",
+          "сир",
+          "помідори",
+          "печериці",
+          "спеції",
+          "часник"
+        ],
+        "nutrition": [
+          {
+            "label": "Білки",
+            "value": "12 г"
+          },
+          {
+            "label": "Жири",
+            "value": "10 г"
+          },
+          {
+            "label": "Вуглеводи",
+            "value": "24 г"
+          },
+          {
+            "label": "Калорійність",
+            "value": "~230 ккал"
+          }
+        ],
+        "allergens": [
+          "глютен",
+          "молочні продукти"
+        ],
+        "traces": [],
+        "storage": [
+          "Зберігати за температури від +2°C до +6°C",
+          "Після відкриття спожити протягом 24 годин",
+          "Не залишати за кімнатної температури понад 2 години"
+        ],
+        "shelfLife": "до 48 годин",
+        "reheating": [
+          "Духовка: 160°C, 6-8 хвилин",
+          "Сковорода: слабкий вогонь під кришкою",
+          "Мікрохвильова піч: 30-60 секунд"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "обіду",
+          "спільної вечері на 3-4 людини"
+        ],
+        "note": "Продукт готується вручну. Зовнішній вигляд і вага можуть незначно відрізнятися."
+      }
+    }
+  }
+}

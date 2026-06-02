@@ -1,0 +1,29 @@
+{
+    "name": "grateful-gravity",
+    "type": "module",
+    "version": "0.0.1",
+    "engines": {
+        "node": ">=22.12.0"
+    },
+    "scripts": {
+        "dev": "astro dev",
+        "build": "npm run lint:css:report && npm run lint:purge:report && astro build",
+        "lint:css": "stylelint \"public/**/*.css\" \"src/**/*.css\" \"src/**/*.astro\"",
+        "lint:css:report": "npm run lint:css || true",
+        "lint:purge": "node scripts/purgecss-report.mjs",
+        "lint:purge:report": "npm run lint:purge || true",
+        "preview": "astro preview",
+        "astro": "astro",
+        "disableBar": "astro preferences disable --global devToolbar",
+        "enableBar": "astro preferences enable --global devToolbar"
+    },
+    "dependencies": {
+        "astro": "^6.3.7"
+    },
+    "devDependencies": {
+        "postcss-html": "^1.8.1",
+        "purgecss": "^8.0.0",
+        "stylelint": "^17.12.0",
+        "stylelint-config-standard": "^40.0.0"
+    }
+}

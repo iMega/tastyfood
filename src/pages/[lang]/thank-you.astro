@@ -1,0 +1,34 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navigation from '../../components/Navigation.astro';
+import { t, type Language } from '../../lib/i18n';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'en' } },
+    { params: { lang: 'ru' } },
+    { params: { lang: 'el' } },
+    { params: { lang: 'uk' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: Language };
+const title = `${t(lang, 'thank_you.title')} - Tastyfood`;
+---
+
+<Layout lang={lang} title={title} alternatePath="/thank-you">
+  <Navigation lang={lang} currentPage="cart" />
+
+  <main class="language-page">
+    <section class="language-card" aria-labelledby="thank-you-title">
+      <h1 id="thank-you-title">{t(lang, 'thank_you.title')}</h1>
+      <p class="language-card__intro">
+        {t(lang, 'thank_you.message')}
+      </p>
+
+      <a class="thank-you-action" href={`/${lang}/`}>
+        {t(lang, 'thank_you.back_to_menu')}
+      </a>
+    </section>
+  </main>
+</Layout>

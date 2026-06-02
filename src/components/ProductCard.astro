@@ -1,0 +1,394 @@
+---
+import { t, type Language } from '../lib/i18n';
+import type { ProductPrice } from '../lib/menu';
+
+interface Props {
+  id: string;
+  name: string;
+  shortName: string;
+  cardDescription: string;
+  locale: Language;
+  price: ProductPrice;
+  weight: number;
+  portions: number;
+  image: string;
+  href: string;
+  categories?: string[];
+  badge?: 'hit' | 'new';
+  allergens: string[];
+}
+
+const {
+  id,
+  name,
+  shortName,
+  cardDescription,
+  locale,
+  price,
+  weight,
+  portions,
+  image,
+  href,
+  categories = [],
+  badge,
+  allergens,
+} = Astro.props;
+
+const formatPrice = (price: ProductPrice, locale: Language): string => {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: price.currency,
+    currencyDisplay: 'narrowSymbol',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(price.value);
+};
+
+const formatWeight = (grams: number): string => {
+  if (grams >= 1000) {
+    const kg = grams / 1000;
+
+    return new Intl.NumberFormat(locale, {
+      style: 'unit',
+      unit: 'kilogram',
+      unitDisplay: 'short',
+      maximumFractionDigits: 1,
+    }).format(kg);
+  }
+
+  return new Intl.NumberFormat(locale, {
+    style: 'unit',
+    unit: 'gram',
+    unitDisplay: 'short',
+    maximumFractionDigits: 0,
+  }).format(grams);
+};
+
+const formatNumber = (value: number): string => {
+  return new Intl.NumberFormat(locale, {
+    maximumFractionDigits: 0,
+  }).format(value);
+};
+
+const primaryAllergen = allergens[0];
+const formattedPrice = formatPrice(price, locale);
+const formattedWeight = formatWeight(weight);
+const addToCartLabel = t(locale, 'product.add_to_cart');
+const meta = [
+  `${formatNumber(portions)} ${t(locale, 'product.portions')}`,
+  primaryAllergen,
+].filter(Boolean);
+---
+
+<article
+  class="product-card"
+  data-categories={categories.join(' ')}
+>
+  {badge && (
+    <span class={`badge badge-${badge}`}>
+      {t(locale, `product.badge.${badge}`)}
+    </span>
+  )}
+
+  <a href={href} class="product-image-link" aria-label={name}>
+    <img src={image} alt={name} class="product-image" loading="eager" decoding="async" />
+  </a>
+
+  <div class="product-info">
+    <div class="product-text">
+      <h3 class="product-name">
+        <a href={href} aria-label={name}>{shortName}</a>
+      </h3>
+      <p class="product-description">{cardDescription}</p>
+
+      <div class="product-meta">
+        {meta.join(' · ')}
+      </div>
+    </div>
+
+    <div class="product-footer">
+      <span class="product-price">
+        <span class="product-price__value">{formattedPrice}</span>
+        <span class="product-price__note">
+          {formattedWeight} · {t(locale, 'product.whole_pie')}
+        </span>
+      </span>
+      <button
+        class="add-to-cart"
+        title={addToCartLabel}
+        aria-label={addToCartLabel}
+        data-cart-button
+        data-product-id={id}
+        data-product-name={name}
+        data-product-price={price.value}
+        data-product-currency={price.currency}
+        data-product-image={image}
+      >
+        <span class="add-icon" data-cart-button-label>+</span>
+      </button>
+    </div>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: oklch(100% 0 0deg);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px oklch(0% 0 0deg / 8%);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .product-card.is-hidden {
+    display: none;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px oklch(0% 0 0deg / 12%);
+  }
+
+  .badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    min-height: 24px;
+    padding: 0 9px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    z-index: 2;
+    color: oklch(100% 0 0deg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .badge-hit {
+    background: linear-gradient(135deg, oklch(70.45% 0.1926 39.23deg) 0%, oklch(67.92% 0.2128 36.53deg) 100%);
+  }
+
+  .badge-new {
+    background: linear-gradient(135deg, oklch(67.31% 0.1624 144.21deg) 0%, oklch(63.01% 0.1516 144.28deg) 100%);
+  }
+
+  .product-image {
+    width: 100%;
+    height: 172px;
+    object-fit: cover;
+    object-position: center;
+    transform: scale(1.04);
+  }
+
+  .product-image-link {
+    display: block;
+    aspect-ratio: 16 / 9;
+    color: inherit;
+    text-decoration: none;
+    background: linear-gradient(180deg, oklch(100% 0 0deg) 0%, oklch(97.73% 0.0062 75.41deg) 76%, oklch(94.33% 0.0131 71.33deg) 100%);
+    overflow: hidden;
+  }
+
+  .product-image-link::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background: linear-gradient(90deg, oklch(42.44% 0.0717 59.27deg / 0%), oklch(42.44% 0.0717 59.27deg / 12%), oklch(42.44% 0.0717 59.27deg / 0%));
+  }
+
+  .product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 14px 0;
+  }
+
+  .product-text {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .product-name {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin: 0;
+    color: oklch(31.68% 0.0309 274.23deg);
+    min-height: 2.75rem;
+    line-height: 1.22;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-name a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .product-name a:hover {
+    text-decoration: underline;
+  }
+
+  .product-description {
+    font-size: 0.875rem;
+    color: oklch(54.09% 0.0156 60.37deg);
+    margin: 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .product-meta {
+    font-size: 0.8125rem;
+    color: oklch(65.97% 0.0167 61.21deg);
+    margin: 0;
+    font-weight: 500;
+  }
+
+  .product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+    min-height: 50px;
+    padding: 10px 56px 8px 0;
+  }
+
+  .product-price {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    color: oklch(31.68% 0.0309 274.23deg);
+  }
+
+  .product-price__value {
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1.05;
+  }
+
+  .product-price__note {
+    color: oklch(61.07% 0.018 58.46deg);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .add-to-cart {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 16px 0 0;
+    background: oklch(42.44% 0.0717 59.27deg);
+    border: none;
+    color: oklch(100% 0 0deg);
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .add-to-cart:hover {
+    background: oklch(37.97% 0.0608 59.6deg);
+  }
+
+  .add-to-cart.is-in-cart {
+    background: oklch(52.89% 0.1056 154.41deg);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  .add-to-cart.is-in-cart:hover {
+    background: oklch(47.39% 0.093 154.83deg);
+  }
+
+  .add-icon {
+    font-weight: 200;
+    line-height: 1;
+  }
+
+  .add-to-cart.is-in-cart .add-icon {
+    font-weight: 800;
+  }
+
+  @media (32.5625rem <= width <= 64rem) {
+    .product-image {
+      object-position: center;
+      transform: scale(1.04);
+    }
+
+    .product-info {
+      padding: 14px 14px 0;
+    }
+  }
+
+  @media (width <= 32.5rem) {
+    .product-image-link {
+      aspect-ratio: 16 / 8.4;
+    }
+
+    .product-image {
+      height: 100%;
+      object-position: center;
+      transform: none;
+    }
+
+    .product-info {
+      padding: 12px 12px 0;
+    }
+
+    .product-text {
+      gap: 6px;
+    }
+
+    .product-name {
+      min-height: auto;
+      font-size: 1.1875rem;
+      line-height: 1.2;
+    }
+
+    .product-description {
+      font-size: 0.875rem;
+      line-height: 1.34;
+    }
+
+    .product-meta {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.25;
+    }
+
+    .product-footer {
+      min-height: 56px;
+      padding: 10px 62px 8px 0;
+    }
+
+    .product-price__value {
+      font-size: 1.375rem;
+    }
+
+    .product-price__note {
+      padding-bottom: 2px;
+      color: oklch(63.08% 0.0178 58.48deg);
+    }
+
+    .add-to-cart {
+      width: 54px;
+      height: 54px;
+      font-size: 1.375rem;
+      border-radius: 18px 0 0;
+    }
+  }
+</style>

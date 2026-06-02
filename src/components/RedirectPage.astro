@@ -1,0 +1,31 @@
+---
+interface Props {
+  to: string;
+}
+
+const { to } = Astro.props;
+const site = Astro.site;
+
+if (!site) {
+  throw new Error('Set site in astro.config.mjs to build redirect pages.');
+}
+
+const canonical = new URL(to, site).toString();
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, follow">
+    <meta http-equiv="refresh" content={`0; url=${to}`}>
+    <link rel="canonical" href={canonical}>
+    <title>Redirecting...</title>
+  </head>
+  <body>
+    <script is:inline define:vars={{ to }}>
+      window.location.replace(to);
+    </script>
+    <a href={to}>Continue</a>
+  </body>
+</html>

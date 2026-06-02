@@ -1,0 +1,34 @@
+---
+import { defaultLanguage, languages } from '../lib/i18n';
+
+interface Props {
+  path?: string;
+}
+
+const { path = '/' } = Astro.props;
+const site = Astro.site;
+
+if (!site) {
+  throw new Error('Set site in astro.config.mjs to build alternate links.');
+}
+
+const cleanPath = path.replace(/^\/+|\/+$/g, '');
+const suffix = cleanPath ? `/${cleanPath}/` : '/';
+
+const localizedPath = (lang: string) => {
+  return `/${lang}${suffix}`;
+};
+
+const alternates = [
+  ...Object.keys(languages).map(lang => [lang, localizedPath(lang)]),
+  ['x-default', localizedPath(defaultLanguage)],
+];
+---
+
+{alternates.map(([lang, href]) => (
+  <link
+    rel="alternate"
+    hreflang={lang}
+    href={new URL(href, site).toString()}
+  />
+))}

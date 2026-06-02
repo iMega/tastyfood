@@ -1,0 +1,81 @@
+---
+import { t, type Language } from '../lib/i18n';
+
+interface Props {
+  lang: Language;
+  currentPage?: 'menu' | 'contact' | 'cart';
+}
+
+const { lang, currentPage = 'menu' } = Astro.props;
+
+const baseUrl = `/${lang}`;
+---
+
+<header class="site-header">
+  <div class="header-wrapper">
+    <a class="brand" href={baseUrl} aria-label="Tastyfood">
+      <span class="brand__name">Tastyfood</span>
+      <span class="brand__tagline">{t(lang, 'brand.tagline')}</span>
+    </a>
+
+    <nav class="main-nav" aria-label={t(lang, 'nav.aria')}>
+      <a class="nav-item" href={baseUrl} aria-current={currentPage === 'menu' ? 'page' : undefined}>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M7 3v18" />
+          <path d="M10 3v6a3 3 0 0 1-6 0V3" />
+          <path d="M17 3v18" />
+          <path d="M17 3c2.2 1.8 3.2 4.3 3 7.5-.1 1.9-1.2 3.5-3 3.5" />
+        </svg>
+        <span>{t(lang, 'nav.menu')}</span>
+      </a>
+
+      <a class="nav-item" href={`${baseUrl}/contact`} aria-current={currentPage === 'contact' ? 'page' : undefined}>
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" />
+          <circle cx="12" cy="9" r="2.4" />
+        </svg>
+        <span>{t(lang, 'nav.contact')}</span>
+      </a>
+    </nav>
+
+    <div class="header-actions">
+      <button
+        class="language"
+        type="button"
+        aria-label={t(lang, 'common.choose_language')}
+      >
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M3 12h18" />
+          <path d="M12 3a14 14 0 0 1 0 18" />
+          <path d="M12 3a14 14 0 0 0 0 18" />
+        </svg>
+        <span>{lang.toUpperCase()}</span>
+      </button>
+
+      <span class="divider" aria-hidden="true"></span>
+
+      <a
+        class="cart"
+        href={`${baseUrl}/cart`}
+        aria-label={t(lang, 'cart.title')}
+        aria-current={currentPage === 'cart' ? 'page' : undefined}
+      >
+        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h2l2.1 10.2a2 2 0 0 0 2 1.6h6.8a2 2 0 0 0 1.9-1.4L21 8H7" />
+          <circle cx="10" cy="20" r="1.2" />
+          <circle cx="18" cy="20" r="1.2" />
+        </svg>
+        <span class="cart__badge" data-cart-count>0</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Language selector
+  const languageSelector = document.querySelector('.language');
+  languageSelector?.addEventListener('click', () => {
+    window.location.href = '/languages';
+  });
+</script>

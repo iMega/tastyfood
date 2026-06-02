@@ -1,0 +1,42 @@
+[
+  {
+    "id": "all",
+    "order": 0,
+    "translations": {
+      "en": "All",
+      "ru": "Все",
+      "el": "Όλα",
+      "uk": "Усе"
+    }
+  },
+  {
+    "id": "meat",
+    "order": 1,
+    "translations": {
+      "en": "Meat",
+      "ru": "Мясные",
+      "el": "Με κρέας",
+      "uk": "М'ясні"
+    }
+  },
+  {
+    "id": "chicken",
+    "order": 2,
+    "translations": {
+      "en": "Chicken",
+      "ru": "С курицей",
+      "el": "Με κοτόπουλο",
+      "uk": "З куркою"
+    }
+  },
+  {
+    "id": "vegetarian",
+    "order": 3,
+    "translations": {
+      "en": "No meat",
+      "ru": "Без мяса",
+      "el": "Χωρίς κρέας",
+      "uk": "Без м'яса"
+    }
+  }
+]

@@ -1,0 +1,105 @@
+---
+import { t, type Language } from '../lib/i18n';
+import { contact as common } from '../lib/contact';
+
+interface Props {
+  lang: Language;
+  title: string;
+}
+
+const { lang, title } = Astro.props;
+
+const label = (key: string) => t(lang, `contact.${key}`);
+const hours = `${label('hours_prefix')}, ${common.hours}`;
+---
+
+<main class="main">
+  <article class="product-page contact-page">
+    <div class="product-hero">
+      <img
+        src={common.map}
+        alt={label('map_alt')}
+        class="product-hero__image contact-page__map"
+      />
+
+      <div class="product-hero__content">
+        <h1>{title}</h1>
+        <p class="product-hero__intro">{label('intro')}</p>
+
+        <a class="contact-phone" href={common.phoneHref}>{common.phone}</a>
+
+        <div class="contact-details">
+          <p>{hours}</p>
+          <p>{common.address}</p>
+        </div>
+
+        <a class="product-hero__cart contact-page__call" href={common.phoneHref}>
+          {label('call')}
+        </a>
+      </div>
+    </div>
+
+    <section class="product-details-card">
+      <div class="product-details-card__grid">
+        <div class="product-details-card__column">
+          <div class="product-details-card__section">
+            <h2>{label('address_title')}</h2>
+            <p>{common.address}</p>
+          </div>
+
+          <div class="product-details-card__section">
+            <h2>{label('hours_title')}</h2>
+            <p>{hours}</p>
+          </div>
+        </div>
+
+        <div class="product-details-card__column">
+          <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible data-mobile-open open>
+            <summary>{label('order_title')}</summary>
+            <p>{label('order_text')}</p>
+          </details>
+
+          <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
+            <summary>{label('pickup_title')}</summary>
+            <p>{label('pickup_text')}</p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<script>
+  const mobileContactQuery = window.matchMedia('(max-width: 56.25rem)');
+  const syncContactAccordions = () => {
+    const isMobile = mobileContactQuery.matches;
+
+    document.querySelectorAll('[data-mobile-collapsible]').forEach(item => {
+      if (!(item instanceof HTMLDetailsElement)) {
+        return;
+      }
+
+      item.open = isMobile ? item.hasAttribute('data-mobile-open') : true;
+    });
+  };
+
+  syncContactAccordions();
+  mobileContactQuery.addEventListener('change', syncContactAccordions);
+
+  document.addEventListener('click', event => {
+    const target = event.target;
+    const summary = target instanceof Element
+      ? target.closest('[data-mobile-collapsible] > summary')
+      : null;
+
+    if (!summary || mobileContactQuery.matches) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (summary.parentElement instanceof HTMLDetailsElement) {
+      summary.parentElement.open = true;
+    }
+  });
+</script>

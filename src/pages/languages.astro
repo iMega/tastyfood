@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from '../components/Navigation.astro';
+
+const options = [
+  {
+    code: 'EN',
+    name: 'English',
+    href: '/en',
+    intro: 'Menu, contacts and cart in English.',
+  },
+  {
+    code: 'RU',
+    name: 'Русский',
+    href: '/ru',
+    intro: 'Меню, контакты и корзина на русском языке.',
+  },
+  {
+    code: 'EL',
+    name: 'Ελληνικά',
+    href: '/el',
+    intro: 'Μενού, επικοινωνία και καλάθι στα ελληνικά.',
+  },
+  {
+    code: 'UK',
+    name: 'Українська',
+    href: '/uk',
+    intro: 'Меню, контакти і кошик українською мовою.',
+  },
+];
+---
+
+<Layout
+  lang="en"
+  title="Select Language - Tastyfood"
+  alternatePath={false}
+>
+  <Navigation lang="en" currentPage="menu" />
+
+  <main class="language-page">
+    <section class="language-card" aria-labelledby="language-title">
+      <h1 id="language-title">Choose your language</h1>
+      <p class="language-card__intro">
+        Select the language for the menu, contacts and cart.
+      </p>
+
+      <nav class="language-list" aria-label="Languages">
+        {options.map(option => (
+          <a class="language-option" href={option.href} data-language-link>
+            <span>
+              <strong>{option.name}</strong>
+              <small>{option.intro}</small>
+            </span>
+            <em>{option.code}</em>
+          </a>
+        ))}
+      </nav>
+    </section>
+  </main>
+</Layout>
+
+<script>
+  // Clear cart when selecting a new language
+  document.querySelectorAll('[data-language-link]').forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.tastyfoodCart) {
+        window.tastyfoodCart.write([]);
+      }
+    });
+  });
+</script>

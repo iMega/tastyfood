@@ -1,0 +1,98 @@
+{
+  "common": {
+    "menu": "Menu",
+    "price": "Price",
+    "order": "Order",
+    "language": "Language",
+    "choose_language": "Choose language"
+  },
+  "brand": {
+    "tagline": "homemade pies"
+  },
+  "nav": {
+    "menu": "Menu",
+    "contact": "Contacts",
+    "aria": "Main navigation"
+  },
+  "menu": {
+    "available": "Available",
+    "unavailable": "Currently unavailable",
+    "allergens": "Allergens",
+    "title": "Tastyfood - homemade pies",
+    "aria": "About Tastyfood",
+    "heading": "Homemade pies in Paphos",
+    "intro": "Meat, cheese, chicken and vegetable pies baked to order. Choose a whole pie for a shared meal."
+  },
+  "product": {
+    "add_to_cart": "Add to cart",
+    "whole_pie": "whole pie",
+    "portions": "portions",
+    "badge": {
+      "hit": "Hit",
+      "new": "New"
+    }
+  },
+  "product_details": {
+    "summary": "Summary",
+    "composition": "Composition",
+    "dough": "Yeast dough",
+    "filling": "Filling",
+    "nutrition": "Nutrition per 100 g",
+    "allergens": "Allergens",
+    "contains": "Contains",
+    "storage": "Storage",
+    "production_date": "Production date",
+    "whole_pie": "Whole pie",
+    "add_to_cart": "Add to cart",
+    "weight_and_price": "Weight and price",
+    "storage_and_serving": "Storage and serving",
+    "reheating": "Reheating"
+  },
+  "cart": {
+    "title": "Cart",
+    "intro": "Review your order and call to confirm pickup time.",
+    "empty": "Your cart is empty.",
+    "empty_message": "Add pies from the menu to place an order.",
+    "back_to_menu": "Back to menu",
+    "items": "Items",
+    "total": "Total",
+    "order_summary": "Your order",
+    "pies": "pies",
+    "pickup_at": "Pickup at",
+    "call_to_order": "Call to order",
+    "confirmation_note": "We confirm orders by phone",
+    "min_order_note": "Minimum order: 3 pies",
+    "order_form": {
+      "name": "Your name",
+      "phone": "Phone number",
+      "email": "Email (optional)",
+      "message": "Comment for order (optional)",
+      "submit": "Place order",
+      "submitting": "Sending..."
+    }
+  },
+  "thank_you": {
+    "title": "Thank you!",
+    "message": "Your order has been sent. We will contact you shortly to confirm the details.",
+    "back_to_menu": "Back to menu"
+  },
+  "contact": {
+    "title": "Contacts",
+    "coming_soon": "Contact page coming soon",
+    "intro": "Fresh homemade pies in Paphos. Call us to place an order or agree on pickup time.",
+    "map_alt": "Map showing Tastyfood location in Paphos",
+    "address_title": "Address",
+    "phone_title": "Phone",
+    "hours_title": "Working Hours",
+    "hours_prefix": "Daily",
+    "order_title": "Orders",
+    "order_text": "Preparing a pie takes about 2 hours. The minimum order is 3 pies. Please order in advance so everything is fresh and ready on time.",
+    "pickup_title": "Pickup",
+    "pickup_text": "Pickup is available at the address above. Please call before visiting to confirm availability.",
+    "note_title": "Good to Know",
+    "note_1": "Let us know about allergies when ordering.",
+    "note_2": "Payment options and delivery availability can be confirmed by phone.",
+    "note_3": "For larger orders, contact us at least one day ahead.",
+    "call": "Call to order"
+  }
+}

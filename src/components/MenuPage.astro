@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from './Navigation.astro';
+import ProductCard from './ProductCard.astro';
+import { t, type Language } from '../lib/i18n';
+import {
+  getMenuItems,
+  getCategories,
+  getLocalizedMenuItem,
+  getLocalizedCategory,
+} from '../lib/menu';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const menuItems = await getMenuItems();
+const categories = [...getCategories()].sort((a, b) => a.order - b.order);
+---
+
+<Layout lang={lang} title={t(lang, 'menu.title')} alternatePath="/">
+  <Navigation lang={lang} currentPage="menu" />
+
+  <main class="main">
+    <div class="container">
+      <section class="menu-intro" aria-label={t(lang, 'menu.aria')}>
+        <h1>{t(lang, 'menu.heading')}</h1>
+        <p>{t(lang, 'menu.intro')}</p>
+      </section>
+
+      <div class="category-filters">
+        {categories.map(category => {
+          const localizedCategory = getLocalizedCategory(category, lang);
+
+          return (
+            <button
+              type="button"
+              class={`filter-btn ${category.id === 'all' ? 'active' : ''}`}
+              data-category={category.id}
+            >
+              {localizedCategory.name}
+            </button>
+          );
+        })}
+      </div>
+
+      <div class="products-grid">
+        {menuItems.map(item => {
+          const product = getLocalizedMenuItem(item, lang);
+
+          return (
+            <ProductCard
+              id={item.id}
+              name={product.name}
+              shortName={product.shortName}
+              cardDescription={product.cardDescription}
+              locale={lang}
+              allergens={product.details.allergens}
+              price={item.price}
+              weight={item.weight}
+              portions={item.portions}
+              image={item.image}
+              href={`/${lang}/products/${item.id}`}
+              categories={item.categories}
+              badge={item.badge}
+            />
+          );
+        })}
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const products = document.querySelectorAll('.product-card');
+    const cartButtons = document.querySelectorAll('[data-cart-button]');
+
+    const updateProductCartButtons = () => {
+      const cart = window.tastyfoodCart.read();
+
+      cartButtons.forEach(button => {
+        if (!(button instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const productId = button.getAttribute('data-product-id');
+        const item = cart.find(entry => entry.id === productId);
+        const quantity = Number(item?.quantity || 0);
+        const label = button.querySelector('[data-cart-button-label]');
+
+        button.classList.toggle('is-in-cart', quantity > 0);
+        button.setAttribute('aria-pressed', quantity > 0 ? 'true' : 'false');
+
+        if (label) {
+          label.textContent = quantity > 0 ? String(quantity) : '+';
+        }
+      });
+    };
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.getAttribute('data-category');
+
+        filterBtns.forEach(button => button.classList.remove('active'));
+        btn.classList.add('active');
+
+        products.forEach(product => {
+          const categories = product.getAttribute('data-categories') || '';
+          const isVisible = category === 'all'
+            || categories.split(' ').includes(category || '');
+
+          product.classList.toggle('is-hidden', !isVisible);
+        });
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement;
+      const button = target.closest('.add-to-cart') as HTMLButtonElement | null;
+
+      if (!button) {
+        return;
+      }
+
+      const productId = button.getAttribute('data-product-id');
+      const name = button.getAttribute('data-product-name');
+      const price = Number(button.getAttribute('data-product-price'));
+      const currency = button.getAttribute('data-product-currency') || 'EUR';
+      const image = button.getAttribute('data-product-image');
+      window.tastyfoodCart.add({
+        id: productId,
+        name,
+        price,
+        currency,
+        image,
+      });
+    });
+
+    updateProductCartButtons();
+    window.addEventListener('tastyfood-cart-change', updateProductCartButtons);
+  </script>
+</Layout>

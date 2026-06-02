@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navigation from './Navigation.astro';
+import ProductDetails from './ProductDetails.astro';
+import type { Language } from '../lib/i18n';
+import type { MenuItem } from '../lib/menu';
+import { getLocalizedMenuItem } from '../lib/menu';
+
+interface Props {
+  item: MenuItem;
+  lang: Language;
+}
+
+const { item, lang } = Astro.props;
+const product = getLocalizedMenuItem(item, lang);
+---
+
+<Layout
+  lang={lang}
+  title={`${product.name} - Tastyfood`}
+  alternatePath={`/products/${item.id}`}
+>
+  <Navigation lang={lang} currentPage="menu" />
+  <ProductDetails
+    id={item.id}
+    name={product.name}
+    image={item.image}
+    price={item.price}
+    weight={item.weight}
+    locale={lang}
+    details={product.details}
+  />
+</Layout>

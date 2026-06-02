@@ -1,0 +1,10 @@
+---
+import ProductPage from '../../../components/ProductPage.astro';
+import { getProductStaticPaths } from '../../../lib/productPaths';
+
+export const getStaticPaths = getProductStaticPaths;
+const { item } = Astro.props;
+const lang = 'ru';
+---
+
+<ProductPage item={item} lang={lang} />

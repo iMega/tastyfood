@@ -1,0 +1,274 @@
+{
+  "id": "potato-cheese",
+  "order": 4,
+  "categoryId": "vegetarian",
+  "categories": [
+    "vegetarian"
+  ],
+  "price": {
+    "value": 20,
+    "currency": "EUR"
+  },
+  "weight": 800,
+  "portions": 8,
+  "image": "/images/potato-cheese.png",
+  "available": true,
+  "translations": {
+    "en": {
+      "name": "Ossetian Pie with Potato and Cheese",
+      "description": "Dough, potato, cheese, butter. Allergens: gluten, dairy. Storage: +2...+6°C. Shelf life: up to 72 hours.",
+      "shortName": "Potato and Cheese",
+      "cardDescription": "Potato, cheese and butter.",
+      "details": {
+        "intro": "Thin dough, a generous filling and a soft spice aroma. Available as a whole pie baked to order.",
+        "dough": [
+          "wheat flour",
+          "water",
+          "vegetable oil",
+          "yeast",
+          "salt",
+          "sugar"
+        ],
+        "filling": [
+          "potato",
+          "cheese",
+          "butter"
+        ],
+        "nutrition": [
+          {
+            "label": "Protein",
+            "value": "8 g"
+          },
+          {
+            "label": "Fat",
+            "value": "10 g"
+          },
+          {
+            "label": "Carbohydrates",
+            "value": "30 g"
+          },
+          {
+            "label": "Calories",
+            "value": "~240 kcal"
+          }
+        ],
+        "allergens": [
+          "gluten",
+          "dairy"
+        ],
+        "traces": [],
+        "storage": [
+          "Store at +2°C to +6°C",
+          "After opening, consume within 24 hours",
+          "Do not keep at room temperature for more than 2 hours"
+        ],
+        "shelfLife": "up to 72 hours",
+        "reheating": [
+          "Oven: 160°C, 6-8 minutes",
+          "Pan: low heat under a lid",
+          "Microwave: 30-60 seconds"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "lunch",
+          "shared dinner for 3-4 people"
+        ],
+        "note": "This product is handmade. Appearance and weight may vary slightly."
+      }
+    },
+    "ru": {
+      "name": "Осетинский пирог с картофелем и сыром",
+      "description": "Состав: тесто, картофель, сыр, сливочное масло. Аллергены: глютен, молочные продукты. Хранение: при температуре +2...+6°C. Срок годности: до 72 часов.",
+      "shortName": "Картофель и сыр",
+      "cardDescription": "Картофель, сыр и сливочное масло.",
+      "details": {
+        "intro": "Тонкое тесто, плотная начинка и мягкий вкус специй. Пирог доступен целиком и готовится на заказ.",
+        "dough": [
+          "пшеничная мука",
+          "вода",
+          "растительное масло",
+          "дрожжи",
+          "соль",
+          "сахар"
+        ],
+        "filling": [
+          "картофель",
+          "сыр",
+          "сливочное масло"
+        ],
+        "nutrition": [
+          {
+            "label": "Белки",
+            "value": "8 г"
+          },
+          {
+            "label": "Жиры",
+            "value": "10 г"
+          },
+          {
+            "label": "Углеводы",
+            "value": "30 г"
+          },
+          {
+            "label": "Калорийность",
+            "value": "~240 ккал"
+          }
+        ],
+        "allergens": [
+          "глютен",
+          "молочные продукты"
+        ],
+        "traces": [],
+        "storage": [
+          "Хранить при температуре от +2°C до +6°C",
+          "После вскрытия употребить в течение 24 часов",
+          "Не оставлять при комнатной температуре более 2 часов"
+        ],
+        "shelfLife": "до 72 часов",
+        "reheating": [
+          "Духовка: 160°C, 6-8 минут",
+          "Сковорода: слабый огонь под крышкой",
+          "Микроволновка: 30-60 секунд"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "обеда",
+          "совместного ужина на 3-4 человек"
+        ],
+        "note": "Продукт готовится вручную. Внешний вид и вес могут незначительно отличаться."
+      }
+    },
+    "el": {
+      "name": "Οσετινή πίτα με πατάτα και τυρί",
+      "description": "Ζύμη, πατάτα, τυρί, βούτυρο. Αλλεργιογόνα: γλουτένη, γαλακτοκομικά. Φύλαξη: +2...+6°C. Διάρκεια ζωής: έως 72 ώρες.",
+      "shortName": "Πατάτα και τυρί",
+      "cardDescription": "Πατάτα, τυρί και βούτυρο.",
+      "details": {
+        "intro": "Λεπτή ζύμη, πλούσια γέμιση και διακριτικό άρωμα μπαχαρικών. Διατίθεται ολόκληρη πίτα κατόπιν παραγγελίας.",
+        "dough": [
+          "αλεύρι σίτου",
+          "νερό",
+          "φυτικό λάδι",
+          "μαγιά",
+          "αλάτι",
+          "ζάχαρη"
+        ],
+        "filling": [
+          "πατάτα",
+          "τυρί",
+          "βούτυρο"
+        ],
+        "nutrition": [
+          {
+            "label": "Πρωτεΐνες",
+            "value": "8 g"
+          },
+          {
+            "label": "Λιπαρά",
+            "value": "10 g"
+          },
+          {
+            "label": "Υδατάνθρακες",
+            "value": "30 g"
+          },
+          {
+            "label": "Θερμίδες",
+            "value": "~240 kcal"
+          }
+        ],
+        "allergens": [
+          "γλουτένη",
+          "γαλακτοκομικά"
+        ],
+        "traces": [],
+        "storage": [
+          "Φυλάσσεται σε θερμοκρασία από +2°C έως +6°C",
+          "Μετά το άνοιγμα καταναλώστε εντός 24 ωρών",
+          "Μην αφήνετε σε θερμοκρασία δωματίου πάνω από 2 ώρες"
+        ],
+        "shelfLife": "έως 72 ώρες",
+        "reheating": [
+          "Φούρνος: 160°C, 6-8 λεπτά",
+          "Τηγάνι: χαμηλή φωτιά με καπάκι",
+          "Φούρνος μικροκυμάτων: 30-60 δευτερόλεπτα"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "μεσημεριανό",
+          "δείπνο για 3-4 άτομα"
+        ],
+        "note": "Το προϊόν παρασκευάζεται χειροποίητα. Η εμφάνιση και το βάρος μπορεί να διαφέρουν ελαφρώς."
+      }
+    },
+    "uk": {
+      "name": "Осетинський пиріг з картоплею і сиром",
+      "description": "Склад: тісто, картопля, сир, вершкове масло. Алергени: глютен, молочні продукти. Зберігання: за температури +2...+6°C. Термін придатності: до 72 годин.",
+      "shortName": "Картопля і сир",
+      "cardDescription": "Картопля, сир і вершкове масло.",
+      "details": {
+        "intro": "Тонке тісто, щедра начинка і мʼякий аромат спецій. Пиріг доступний цілим і готується на замовлення.",
+        "dough": [
+          "пшеничне борошно",
+          "вода",
+          "рослинна олія",
+          "дріжджі",
+          "сіль",
+          "цукор"
+        ],
+        "filling": [
+          "картопля",
+          "сир",
+          "вершкове масло"
+        ],
+        "nutrition": [
+          {
+            "label": "Білки",
+            "value": "8 г"
+          },
+          {
+            "label": "Жири",
+            "value": "10 г"
+          },
+          {
+            "label": "Вуглеводи",
+            "value": "30 г"
+          },
+          {
+            "label": "Калорійність",
+            "value": "~240 ккал"
+          }
+        ],
+        "allergens": [
+          "глютен",
+          "молочні продукти"
+        ],
+        "traces": [],
+        "storage": [
+          "Зберігати за температури від +2°C до +6°C",
+          "Після відкриття спожити протягом 24 годин",
+          "Не залишати за кімнатної температури понад 2 години"
+        ],
+        "shelfLife": "до 72 годин",
+        "reheating": [
+          "Духовка: 160°C, 6-8 хвилин",
+          "Сковорода: слабкий вогонь під кришкою",
+          "Мікрохвильова піч: 30-60 секунд"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "take away",
+          "обіду",
+          "спільної вечері на 3-4 людини"
+        ],
+        "note": "Продукт готується вручну. Зовнішній вигляд і вага можуть незначно відрізнятися."
+      }
+    }
+  }
+}
