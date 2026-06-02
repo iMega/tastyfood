@@ -1,5 +1,6 @@
 ---
 import { defaultLanguage, languages } from '../lib/i18n';
+import { absoluteUrl } from '../lib/config';
 
 interface Props {
   path?: string;
@@ -29,6 +30,6 @@ const alternates = [
   <link
     rel="alternate"
     hreflang={lang}
-    href={new URL(href, site).toString()}
+    href={absoluteUrl(href)}
   />
 ))}

@@ -1,1 +1,2 @@
-export const siteUrl = "https://imega.github.io/tastyfood";
+export const siteUrl = "http://imega.club/tastyfood";
+export const siteBase = "/tastyfood";

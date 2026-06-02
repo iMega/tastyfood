@@ -1,4 +1,6 @@
 ---
+import { absoluteUrl, withBase } from '../lib/config';
+
 interface Props {
   to: string;
 }
@@ -10,7 +12,8 @@ if (!site) {
   throw new Error('Set site in astro.config.mjs to build redirect pages.');
 }
 
-const canonical = new URL(to, site).toString();
+const redirectTo = withBase(to);
+const canonical = absoluteUrl(to);
 ---
 
 <!DOCTYPE html>
@@ -18,14 +21,14 @@ const canonical = new URL(to, site).toString();
   <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, follow">
-    <meta http-equiv="refresh" content={`0; url=${to}`}>
+    <meta http-equiv="refresh" content={`0; url=${redirectTo}`}>
     <link rel="canonical" href={canonical}>
     <title>Redirecting...</title>
   </head>
   <body>
-    <script is:inline define:vars={{ to }}>
-      window.location.replace(to);
+    <script is:inline define:vars={{ redirectTo }}>
+      window.location.replace(redirectTo);
     </script>
-    <a href={to}>Continue</a>
+    <a href={redirectTo}>Continue</a>
   </body>
 </html>

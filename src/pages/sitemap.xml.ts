@@ -1,6 +1,7 @@
 import type { APIRoute } from 'astro';
 import { languages } from '../lib/i18n';
 import { getMenuItems } from '../lib/menu';
+import { absoluteUrl } from '../lib/config';
 
 const languageCodes = Object.keys(languages);
 
@@ -31,12 +32,7 @@ const escapeXml = (value: string): string => {
     .replaceAll("'", '&apos;');
 };
 
-export const GET: APIRoute = async ({ site }) => {
-  if (!site) {
-    throw new Error('Set site in astro.config.mjs to build sitemap.');
-  }
-
-  const base = site;
+export const GET: APIRoute = async () => {
   const lastmod = new Date().toISOString();
   const items = await getMenuItems();
   const staticUrls = pages.flatMap(page => {
@@ -52,7 +48,7 @@ export const GET: APIRoute = async ({ site }) => {
   const sitemapUrls = [...staticUrls, ...productUrls];
 
   const urls = sitemapUrls.map(({ path, priority }) => {
-    const loc = new URL(path, base).toString();
+    const loc = absoluteUrl(path);
 
     return [
       '  <url>',

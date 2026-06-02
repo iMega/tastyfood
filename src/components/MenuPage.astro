@@ -9,6 +9,7 @@ import {
   getLocalizedMenuItem,
   getLocalizedCategory,
 } from '../lib/menu';
+import { withBase } from '../lib/config';
 
 interface Props {
   lang: Language;
@@ -61,7 +62,7 @@ const categories = [...getCategories()].sort((a, b) => a.order - b.order);
               weight={item.weight}
               portions={item.portions}
               image={item.image}
-              href={`/${lang}/products/${item.id}`}
+              href={withBase(`/${lang}/products/${item.id}`)}
               categories={item.categories}
               badge={item.badge}
             />

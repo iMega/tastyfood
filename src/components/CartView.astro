@@ -2,14 +2,14 @@
 import { t, type Language } from '../lib/i18n';
 import { contact } from '../lib/contact';
 import { order } from '../lib/order';
-import { config } from '../lib/config';
+import { absoluteUrl, withBase } from '../lib/config';
 
 interface Props {
   lang: Language;
 }
 
 const { lang } = Astro.props;
-const redirectUrl = `${config.siteUrl}/${lang}/thank-you/`;
+const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
 ---
 
 <main class="main">
@@ -23,7 +23,7 @@ const redirectUrl = `${config.siteUrl}/${lang}/thank-you/`;
         <div class="cart-empty" data-cart-empty hidden>
           <p class="cart-empty__title">{t(lang, 'cart.empty')}</p>
           <p class="cart-empty__text">{t(lang, 'cart.empty_message')}</p>
-          <a href={`/${lang}/`} class="cart-empty__button">{t(lang, 'cart.back_to_menu')}</a>
+          <a href={withBase(`/${lang}/`)} class="cart-empty__button">{t(lang, 'cart.back_to_menu')}</a>
         </div>
       </div>
 

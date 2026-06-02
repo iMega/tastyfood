@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import { siteUrl } from "./site.config.js";
+import { siteBase, siteUrl } from "./site.config.js";
 
 const scriptEntryName = (chunk) => {
     const name = chunk.name
@@ -13,6 +13,7 @@ const scriptEntryName = (chunk) => {
 
 export default defineConfig({
     site: siteUrl,
+    base: siteBase,
     compressHTML: "jsx",
     build: {
         assets: "asset",

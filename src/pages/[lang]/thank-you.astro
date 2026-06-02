@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navigation from '../../components/Navigation.astro';
 import { t, type Language } from '../../lib/i18n';
+import { withBase } from '../../lib/config';
 
 export function getStaticPaths() {
   return [
@@ -26,7 +27,7 @@ const title = `${t(lang, 'thank_you.title')} - Tastyfood`;
         {t(lang, 'thank_you.message')}
       </p>
 
-      <a class="thank-you-action" href={`/${lang}/`}>
+      <a class="thank-you-action" href={withBase(`/${lang}/`)}>
         {t(lang, 'thank_you.back_to_menu')}
       </a>
     </section>

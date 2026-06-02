@@ -1,30 +1,31 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Navigation from '../components/Navigation.astro';
+import { withBase } from '../lib/config';
 
 const options = [
   {
     code: 'EN',
     name: 'English',
-    href: '/en',
+    href: withBase('/en'),
     intro: 'Menu, contacts and cart in English.',
   },
   {
     code: 'RU',
     name: 'Русский',
-    href: '/ru',
+    href: withBase('/ru'),
     intro: 'Меню, контакты и корзина на русском языке.',
   },
   {
     code: 'EL',
     name: 'Ελληνικά',
-    href: '/el',
+    href: withBase('/el'),
     intro: 'Μενού, επικοινωνία και καλάθι στα ελληνικά.',
   },
   {
     code: 'UK',
     name: 'Українська',
-    href: '/uk',
+    href: withBase('/uk'),
     intro: 'Меню, контакти і кошик українською мовою.',
   },
 ];

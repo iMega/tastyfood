@@ -1,5 +1,6 @@
 ---
 import { t, type Language } from '../lib/i18n';
+import { withBase } from '../lib/config';
 
 interface Props {
   lang: Language;
@@ -8,7 +9,8 @@ interface Props {
 
 const { lang, currentPage = 'menu' } = Astro.props;
 
-const baseUrl = `/${lang}`;
+const baseUrl = withBase(`/${lang}`);
+const languageHref = withBase('/languages');
 ---
 
 <header class="site-header">
@@ -72,10 +74,10 @@ const baseUrl = `/${lang}`;
   </div>
 </header>
 
-<script>
+<script is:inline define:vars={{ languageHref }}>
   // Language selector
   const languageSelector = document.querySelector('.language');
   languageSelector?.addEventListener('click', () => {
-    window.location.href = '/languages';
+    window.location.href = languageHref;
   });
 </script>
