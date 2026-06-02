@@ -3,10 +3,12 @@
 ---
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2B719Z5Q2"></script>
-<script>
+<script is:inline>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  window.gtag = function gtag() {
+    window.dataLayer.push(arguments);
+  };
 
-  gtag('config', 'G-Y2B719Z5Q2');
+  window.gtag('js', new Date());
+  window.gtag('config', 'G-Y2B719Z5Q2');
 </script>
