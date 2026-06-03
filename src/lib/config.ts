@@ -1,4 +1,4 @@
-import { siteBase, siteUrl } from '../../site.config';
+import { googleSearchConsoleVerification, siteBase, siteUrl } from '../../site.config';
 
 export const withBase = (path = '/'): string => {
   const cleanBase = siteBase.replace(/\/+$/g, '');
@@ -14,6 +14,7 @@ export const absoluteUrl = (path = '/'): string => {
 };
 
 export const config = {
+  googleSearchConsoleVerification,
   siteBase,
   siteUrl,
 };
