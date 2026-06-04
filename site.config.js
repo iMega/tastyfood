@@ -1,3 +1,3 @@
-export const siteUrl = "http://imega.club/tastyfood";
+export const siteUrl = "https://imega.club/tastyfood";
 export const siteBase = "/tastyfood";
 export const googleSearchConsoleVerification = "";
