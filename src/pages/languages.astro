@@ -63,21 +63,21 @@ const options = [
       </nav>
     </section>
   </main>
-</Layout>
 
-<script>
-  // Clear cart when selecting a new language
-  document.querySelectorAll('[data-language-link]').forEach(link => {
-    link.addEventListener('click', () => {
-      window.tastyfoodAnalytics.track('language_change', {
-        page_type: 'language',
-        from_language: document.documentElement.lang || 'en',
-        to_language: link.getAttribute('data-language-code') || 'unknown',
+  <script>
+    // Clear cart when selecting a new language
+    document.querySelectorAll('[data-language-link]').forEach(link => {
+      link.addEventListener('click', () => {
+        window.tastyfoodAnalytics.track('language_change', {
+          page_type: 'language',
+          from_language: document.documentElement.lang || 'en',
+          to_language: link.getAttribute('data-language-code') || 'unknown',
+        });
+
+        if (window.tastyfoodCart) {
+          window.tastyfoodCart.write([]);
+        }
       });
-
-      if (window.tastyfoodCart) {
-        window.tastyfoodCart.write([]);
-      }
     });
-  });
-</script>
+  </script>
+</Layout>

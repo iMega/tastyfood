@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import { siteBase, siteUrl } from "./site.config.js";
+import minifyHtml from "astro-minify-html-swc";
 
 const scriptEntryName = (chunk) => {
     const name = chunk.name
@@ -35,4 +36,5 @@ export default defineConfig({
             },
         },
     },
+    integrations: [minifyHtml()],
 });

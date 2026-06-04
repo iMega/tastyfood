@@ -21,6 +21,7 @@
         "astro": "^6.3.7"
     },
     "devDependencies": {
+        "astro-minify-html-swc": "^0.1.11",
         "postcss-html": "^1.8.1",
         "purgecss": "^8.0.0",
         "stylelint": "^17.12.0",

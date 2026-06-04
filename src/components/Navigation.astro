@@ -13,7 +13,7 @@ const baseUrl = withBase(`/${lang}`);
 const languageHref = withBase('/languages');
 ---
 
-<header class="site-header">
+<header class="site-header" data-site-header data-current-page={currentPage}>
   <div class="header-wrapper">
     <a class="brand" href={baseUrl} aria-label="Tastyfood">
       <span class="brand__name">Tastyfood</span>
@@ -46,6 +46,7 @@ const languageHref = withBase('/languages');
         type="button"
         aria-label={t(lang, 'common.choose_language')}
         data-language-button
+        data-language-href={languageHref}
       >
         <svg class="icon language__icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
@@ -76,18 +77,25 @@ const languageHref = withBase('/languages');
   </div>
 </header>
 
-<script is:inline define:vars={{ languageHref, currentPage }}>
+<script>
   // Language selector
   const languageSelector = document.querySelector('.language');
   languageSelector?.addEventListener('click', () => {
+    const siteHeader = document.querySelector('[data-site-header]');
+    const currentPage = siteHeader?.getAttribute('data-current-page') || 'menu';
+
     window.tastyfoodAnalytics?.track('menu_anchor_click', {
       page_type: currentPage,
       target_section: 'languages',
     });
-    window.location.href = languageHref;
+
+    window.location.href = languageSelector.getAttribute('data-language-href') || '/languages';
   });
 
   document.querySelector('[data-cart-link]')?.addEventListener('click', () => {
+    const siteHeader = document.querySelector('[data-site-header]');
+    const currentPage = siteHeader?.getAttribute('data-current-page') || 'menu';
+
     window.tastyfoodAnalytics?.track('menu_anchor_click', {
       page_type: currentPage,
       target_section: 'cart',
