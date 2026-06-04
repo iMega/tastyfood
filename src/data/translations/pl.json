@@ -1,0 +1,98 @@
+{
+  "common": {
+    "menu": "Menu",
+    "price": "Cena",
+    "order": "Zamówienie",
+    "language": "Język",
+    "choose_language": "Wybierz język"
+  },
+  "brand": {
+    "tagline": "domowe placki"
+  },
+  "nav": {
+    "menu": "Menu",
+    "contact": "Kontakt",
+    "aria": "Główna nawigacja"
+  },
+  "menu": {
+    "available": "Dostępne",
+    "unavailable": "Obecnie niedostępne",
+    "allergens": "Alergeny",
+    "title": "Tastyfood - domowe placki",
+    "aria": "O Tastyfood",
+    "heading": "Domowe placki w Pafos",
+    "intro": "Placki z mięsem, serem, kurczakiem i warzywami pieczone na zamówienie. Wybierz cały placek na wspólny posiłek."
+  },
+  "product": {
+    "add_to_cart": "Dodaj do koszyka",
+    "whole_pie": "cały placek",
+    "portions": "porcji",
+    "badge": {
+      "hit": "Hit",
+      "new": "Nowość"
+    }
+  },
+  "product_details": {
+    "summary": "Podsumowanie",
+    "composition": "Skład",
+    "dough": "Ciasto drożdżowe",
+    "filling": "Nadzienie",
+    "nutrition": "Wartości odżywcze na 100 g",
+    "allergens": "Alergeny",
+    "contains": "Zawiera",
+    "storage": "Przechowywanie",
+    "production_date": "Data produkcji",
+    "whole_pie": "Cały placek",
+    "add_to_cart": "Dodaj do koszyka",
+    "weight_and_price": "Waga i cena",
+    "storage_and_serving": "Przechowywanie i podawanie",
+    "reheating": "Podgrzewanie"
+  },
+  "cart": {
+    "title": "Koszyk",
+    "intro": "Sprawdź zamówienie i zadzwoń, aby potwierdzić godzinę odbioru.",
+    "empty": "Koszyk jest pusty.",
+    "empty_message": "Dodaj placki z menu, aby złożyć zamówienie.",
+    "back_to_menu": "Wróć do menu",
+    "items": "Pozycje",
+    "total": "Razem",
+    "order_summary": "Twoje zamówienie",
+    "pies": "placki",
+    "pickup_at": "Odbiór pod adresem",
+    "call_to_order": "Zadzwoń, aby zamówić",
+    "confirmation_note": "Potwierdzamy zamówienia telefonicznie",
+    "min_order_note": "Minimalne zamówienie: 3 placki",
+    "order_form": {
+      "name": "Twoje imię",
+      "phone": "Numer telefonu",
+      "email": "Email (opcjonalnie)",
+      "message": "Komentarz do zamówienia (opcjonalnie)",
+      "submit": "Złóż zamówienie",
+      "submitting": "Wysyłanie..."
+    }
+  },
+  "thank_you": {
+    "title": "Dziękujemy!",
+    "message": "Twoje zamówienie zostało wysłane. Wkrótce skontaktujemy się z Tobą, aby potwierdzić szczegóły.",
+    "back_to_menu": "Wróć do menu"
+  },
+  "contact": {
+    "title": "Kontakt",
+    "coming_soon": "Strona kontaktowa wkrótce",
+    "intro": "Świeże domowe placki w Pafos. Zadzwoń, aby złożyć zamówienie lub ustalić godzinę odbioru.",
+    "map_alt": "Mapa pokazująca lokalizację Tastyfood w Pafos",
+    "address_title": "Adres",
+    "phone_title": "Telefon",
+    "hours_title": "Godziny otwarcia",
+    "hours_prefix": "Codziennie",
+    "order_title": "Zamówienia",
+    "order_text": "Przygotowanie placka zajmuje około 2 godzin. Minimalne zamówienie to 3 placki. Zamów wcześniej, aby wszystko było świeże i gotowe na czas.",
+    "pickup_title": "Odbiór",
+    "pickup_text": "Odbiór jest dostępny pod adresem podanym powyżej. Przed wizytą zadzwoń, aby potwierdzić dostępność.",
+    "note_title": "Warto wiedzieć",
+    "note_1": "Poinformuj nas o alergiach podczas składania zamówienia.",
+    "note_2": "Opcje płatności i dostępność dostawy można potwierdzić telefonicznie.",
+    "note_3": "W przypadku większych zamówień skontaktuj się z nami co najmniej dzień wcześniej.",
+    "call": "Zadzwoń i zamów"
+  }
+}

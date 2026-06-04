@@ -2,12 +2,14 @@ import enTranslations from '../data/translations/en.json';
 import ruTranslations from '../data/translations/ru.json';
 import elTranslations from '../data/translations/el.json';
 import ukTranslations from '../data/translations/uk.json';
+import plTranslations from '../data/translations/pl.json';
 
 export const languages = {
   en: { code: 'en', name: 'English' },
   ru: { code: 'ru', name: 'Русский' },
   el: { code: 'el', name: 'Ελληνικά' },
   uk: { code: 'uk', name: 'Українська' },
+  pl: { code: 'pl', name: 'Polski' },
 } as const;
 
 export type Language = keyof typeof languages;
@@ -19,6 +21,7 @@ const translations = {
   ru: ruTranslations,
   el: elTranslations,
   uk: ukTranslations,
+  pl: plTranslations,
 };
 
 export function getTranslations(lang: Language) {

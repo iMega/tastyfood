@@ -274,6 +274,71 @@
         ],
         "note": "Продукт готується вручну. Зовнішній вигляд і вага можуть незначно відрізнятися."
       }
+    },
+    "pl": {
+      "name": "Placek osetyjski z serem i ziołami",
+      "description": "Skład: ciasto, ser, świeże zioła, masło, śmietana. Alergeny: gluten, produkty mleczne. Przechowywanie: +2...+6°C. Termin przydatności: do 72 godzin.",
+      "shortName": "Ser i zioła",
+      "cardDescription": "Ser, świeże zioła, masło i śmietana.",
+      "details": {
+        "intro": "Cienkie ciasto, obfite nadzienie i łagodny domowy smak. Dostępny jako cały placek pieczony na zamówienie.",
+        "dough": [
+          "mąka pszenna",
+          "woda",
+          "olej roślinny",
+          "drożdże",
+          "sól",
+          "cukier"
+        ],
+        "filling": [
+          "ser",
+          "świeże zioła",
+          "masło",
+          "śmietana"
+        ],
+        "nutrition": [
+          {
+            "label": "Białko",
+            "value": "11 g"
+          },
+          {
+            "label": "Tłuszcz",
+            "value": "11 g"
+          },
+          {
+            "label": "Węglowodany",
+            "value": "25 g"
+          },
+          {
+            "label": "Kalorie",
+            "value": "~245 kcal"
+          }
+        ],
+        "allergens": [
+          "gluten",
+          "produkty mleczne"
+        ],
+        "traces": [],
+        "storage": [
+          "Przechowywać w temperaturze od +2°C do +6°C",
+          "Po otwarciu spożyć w ciągu 24 godzin",
+          "Nie przechowywać w temperaturze pokojowej dłużej niż 2 godziny"
+        ],
+        "shelfLife": "do 72 godzin",
+        "reheating": [
+          "Piekarnik: 160°C, 6-8 minut",
+          "Patelnia: mały ogień pod przykryciem",
+          "Mikrofalówka: 30-60 sekund"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "na wynos",
+          "obiad",
+          "wspólna kolacja dla 3-4 osób"
+        ],
+        "note": "Ten produkt jest przygotowywany ręcznie. Wygląd i waga mogą się nieznacznie różnić."
+      }
     }
   }
 }

@@ -269,6 +269,70 @@
         ],
         "note": "Продукт готується вручну. Зовнішній вигляд і вага можуть незначно відрізнятися."
       }
+    },
+    "pl": {
+      "name": "Placek z ziemniakami i pieczarkami",
+      "description": "Skład: ciasto, ziemniaki, pieczarki, cebula, przyprawy. Alergeny: gluten. Przechowywanie: +2...+6°C. Termin przydatności: do 72 godzin.",
+      "shortName": "Ziemniaki i pieczarki",
+      "cardDescription": "Ziemniaki, pieczarki, cebula i przyprawy.",
+      "details": {
+        "intro": "Cienkie ciasto, obfite nadzienie i łagodny domowy smak. Dostępny jako cały placek pieczony na zamówienie.",
+        "dough": [
+          "mąka pszenna",
+          "woda",
+          "olej roślinny",
+          "drożdże",
+          "sól",
+          "cukier"
+        ],
+        "filling": [
+          "ziemniaki",
+          "pieczarki",
+          "cebula",
+          "przyprawy"
+        ],
+        "nutrition": [
+          {
+            "label": "Białko",
+            "value": "11 g"
+          },
+          {
+            "label": "Tłuszcz",
+            "value": "11 g"
+          },
+          {
+            "label": "Węglowodany",
+            "value": "25 g"
+          },
+          {
+            "label": "Kalorie",
+            "value": "~245 kcal"
+          }
+        ],
+        "allergens": [
+          "gluten"
+        ],
+        "traces": [],
+        "storage": [
+          "Przechowywać w temperaturze od +2°C do +6°C",
+          "Po otwarciu spożyć w ciągu 24 godzin",
+          "Nie przechowywać w temperaturze pokojowej dłużej niż 2 godziny"
+        ],
+        "shelfLife": "do 72 godzin",
+        "reheating": [
+          "Piekarnik: 160°C, 6-8 minut",
+          "Patelnia: mały ogień pod przykryciem",
+          "Mikrofalówka: 30-60 sekund"
+        ],
+        "productionDate": "",
+        "packaging": "",
+        "suitableFor": [
+          "na wynos",
+          "obiad",
+          "wspólna kolacja dla 3-4 osób"
+        ],
+        "note": "Ten produkt jest przygotowywany ręcznie. Wygląd i waga mogą się nieznacznie różnić."
+      }
     }
   }
 }
