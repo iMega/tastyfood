@@ -22,7 +22,7 @@ const languageHref = withBase('/languages');
 
     <nav class="main-nav" aria-label={t(lang, 'nav.aria')}>
       <a class="nav-item" href={baseUrl} aria-current={currentPage === 'menu' ? 'page' : undefined}>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="icon nav-item__icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M7 3v18" />
           <path d="M10 3v6a3 3 0 0 1-6 0V3" />
           <path d="M17 3v18" />
@@ -32,7 +32,7 @@ const languageHref = withBase('/languages');
       </a>
 
       <a class="nav-item" href={`${baseUrl}/contact`} aria-current={currentPage === 'contact' ? 'page' : undefined}>
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="icon nav-item__icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Z" />
           <circle cx="12" cy="9" r="2.4" />
         </svg>
@@ -47,7 +47,7 @@ const languageHref = withBase('/languages');
         aria-label={t(lang, 'common.choose_language')}
         data-language-button
       >
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="icon language__icon" viewBox="0 0 24 24" aria-hidden="true">
           <circle cx="12" cy="12" r="9" />
           <path d="M3 12h18" />
           <path d="M12 3a14 14 0 0 1 0 18" />
@@ -65,7 +65,7 @@ const languageHref = withBase('/languages');
         aria-current={currentPage === 'cart' ? 'page' : undefined}
         data-cart-link
       >
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <svg class="icon cart__icon" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M4 5h2l2.1 10.2a2 2 0 0 0 2 1.6h6.8a2 2 0 0 0 1.9-1.4L21 8H7" />
           <circle cx="10" cy="20" r="1.2" />
           <circle cx="18" cy="20" r="1.2" />

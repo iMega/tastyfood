@@ -40,7 +40,7 @@ const options = [
 
   <main class="language-page">
     <section class="language-card" aria-labelledby="language-title">
-      <h1 id="language-title">Choose your language</h1>
+      <h1 id="language-title" class="language-card__title">Choose your language</h1>
       <p class="language-card__intro">
         Select the language for the menu, contacts and cart.
       </p>
@@ -53,11 +53,11 @@ const options = [
             data-language-link
             data-language-code={option.code.toLowerCase()}
           >
-            <span>
-              <strong>{option.name}</strong>
-              <small>{option.intro}</small>
+            <span class="language-option__content">
+              <strong class="language-option__name">{option.name}</strong>
+              <small class="language-option__intro">{option.intro}</small>
             </span>
-            <em>{option.code}</em>
+            <em class="language-option__code">{option.code}</em>
           </a>
         ))}
       </nav>

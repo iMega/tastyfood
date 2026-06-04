@@ -23,7 +23,7 @@ const hours = `${label('hours_prefix')}, ${common.hours}`;
       />
 
       <div class="product-hero__content">
-        <h1>{title}</h1>
+        <h1 class="product-hero__title">{title}</h1>
         <p class="product-hero__intro">{label('intro')}</p>
 
         <a
@@ -37,8 +37,8 @@ const hours = `${label('hours_prefix')}, ${common.hours}`;
         </a>
 
         <div class="contact-details">
-          <p>{hours}</p>
-          <p>{common.address}</p>
+          <p class="contact-details__item">{hours}</p>
+          <p class="contact-details__item">{common.address}</p>
         </div>
 
         <a
@@ -57,25 +57,25 @@ const hours = `${label('hours_prefix')}, ${common.hours}`;
       <div class="product-details-card__grid">
         <div class="product-details-card__column">
           <div class="product-details-card__section">
-            <h2>{label('address_title')}</h2>
-            <p>{common.address}</p>
+            <h2 class="product-details-card__heading">{label('address_title')}</h2>
+            <p class="product-details-card__text">{common.address}</p>
           </div>
 
           <div class="product-details-card__section">
-            <h2>{label('hours_title')}</h2>
-            <p>{hours}</p>
+            <h2 class="product-details-card__heading">{label('hours_title')}</h2>
+            <p class="product-details-card__text">{hours}</p>
           </div>
         </div>
 
         <div class="product-details-card__column">
           <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible data-mobile-open open>
-            <summary>{label('order_title')}</summary>
-            <p>{label('order_text')}</p>
+            <summary class="product-details-card__summary">{label('order_title')}</summary>
+            <p class="product-details-card__text">{label('order_text')}</p>
           </details>
 
           <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
-            <summary>{label('pickup_title')}</summary>
-            <p>{label('pickup_text')}</p>
+            <summary class="product-details-card__summary">{label('pickup_title')}</summary>
+            <p class="product-details-card__text">{label('pickup_text')}</p>
           </details>
         </div>
       </div>

@@ -29,13 +29,13 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
 
       <aside class="cart-summary" data-cart-summary hidden>
         <div class="cart-summary__total">
-          <strong>{t(lang, 'cart.total')}</strong>
-          <strong data-cart-total>€0</strong>
+          <strong class="cart-summary__total-label">{t(lang, 'cart.total')}</strong>
+          <strong class="cart-summary__total-value" data-cart-total>€0</strong>
         </div>
 
         <div class="cart-summary__info">
           <p class="cart-summary__min-order">{t(lang, 'cart.min_order_note')}</p>
-          <p>{t(lang, 'cart.pickup_at')} {contact.address}</p>
+          <p class="cart-summary__text">{t(lang, 'cart.pickup_at')} {contact.address}</p>
         </div>
 
         <form class="cart-form" data-cart-form action="https://api.staticforms.dev/submit" method="POST">

@@ -26,8 +26,8 @@ const categories = [...getCategories()].sort((a, b) => a.order - b.order);
   <main class="main">
     <div class="container">
       <section class="menu-intro" aria-label={t(lang, 'menu.aria')}>
-        <h1>{t(lang, 'menu.heading')}</h1>
-        <p>{t(lang, 'menu.intro')}</p>
+        <h1 class="menu-intro__title">{t(lang, 'menu.heading')}</h1>
+        <p class="menu-intro__text">{t(lang, 'menu.intro')}</p>
       </section>
 
       <div class="category-filters">

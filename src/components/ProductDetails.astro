@@ -72,10 +72,10 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
         decoding="async"
       />
       <div class="product-hero__content">
-        <h1>{name}</h1>
+        <h1 class="product-hero__title">{name}</h1>
         <p class="product-hero__intro">{details.intro}</p>
         <ul class="product-hero__facts" aria-label={label('summary')}>
-          {summaryItems.map(item => <li>{item}</li>)}
+          {summaryItems.map(item => <li class="product-hero__fact">{item}</li>)}
         </ul>
         <div class="product-hero__buy">
           <div>
@@ -106,18 +106,18 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
       <div class="product-details-card__grid">
         <div class="product-details-card__column">
           <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible data-mobile-open open>
-            <summary>{label('composition')}</summary>
-            <p><strong>{label('filling')}:</strong> {details.filling.join(', ')}.</p>
-            <p><strong>{label('dough')}:</strong> {details.dough.join(', ')}.</p>
+            <summary class="product-details-card__summary">{label('composition')}</summary>
+            <p class="product-details-card__text"><strong class="product-details-card__label">{label('filling')}:</strong> {details.filling.join(', ')}.</p>
+            <p class="product-details-card__text"><strong class="product-details-card__label">{label('dough')}:</strong> {details.dough.join(', ')}.</p>
           </details>
 
           <div class="product-details-card__section">
-            <h2>{label('weight_and_price')}</h2>
-            <dl>
+            <h2 class="product-details-card__heading">{label('weight_and_price')}</h2>
+            <dl class="product-details-card__list">
               {wholeWeight && (
                 <>
-                  <dt>{label('whole_pie')}</dt>
-                  <dd>{wholeWeight} · {wholePrice}</dd>
+                  <dt class="product-details-card__term">{label('whole_pie')}</dt>
+                  <dd class="product-details-card__value">{wholeWeight} · {wholePrice}</dd>
                 </>
               )}
             </dl>
@@ -126,39 +126,39 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
 
         <div class="product-details-card__column">
           <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
-            <summary>{label('nutrition')}</summary>
-            <dl>
+            <summary class="product-details-card__summary">{label('nutrition')}</summary>
+            <dl class="product-details-card__list">
               {details.nutrition.map(item => (
                 <>
-                  <dt>{item.label}</dt>
-                  <dd>{item.value}</dd>
+                  <dt class="product-details-card__term">{item.label}</dt>
+                  <dd class="product-details-card__value">{item.value}</dd>
                 </>
               ))}
             </dl>
           </details>
 
           <details class="product-details-card__section product-details-card__accordion" data-mobile-collapsible open>
-            <summary>{label('allergens')}</summary>
-            <p>{allergenText}.</p>
+            <summary class="product-details-card__summary">{label('allergens')}</summary>
+            <p class="product-details-card__text">{allergenText}.</p>
           </details>
         </div>
       </div>
 
       <details class="product-details-card__section product-details-card__section--wide product-details-card__accordion" data-mobile-collapsible open>
-        <summary>{label('storage_and_serving')}</summary>
+        <summary class="product-details-card__summary">{label('storage_and_serving')}</summary>
         <h3 class="product-details-card__subheading">{label('storage')}</h3>
-        {details.storage.map(item => <p>{item}.</p>)}
+        {details.storage.map(item => <p class="product-details-card__text">{item}.</p>)}
         <h3 class="product-details-card__subheading">{label('reheating')}</h3>
-        {details.reheating.map(item => <p>{item}.</p>)}
+        {details.reheating.map(item => <p class="product-details-card__text">{item}.</p>)}
         {details.packaging && (
           <p class="product-details-card__muted">{details.packaging}</p>
         )}
       </details>
 
       <div class="product-details-card__note">
-        <p>{details.note}</p>
+        <p class="product-details-card__note-text">{details.note}</p>
         {details.productionDate && (
-          <p>{label('production_date')}: {details.productionDate}</p>
+          <p class="product-details-card__note-text">{label('production_date')}: {details.productionDate}</p>
         )}
       </div>
     </section>
