@@ -1,14 +1,28 @@
 ---
-// Google Analytics component
+import { config } from '../lib/config';
+
+const { googleAnalyticsMeasurementId } = config;
+const googleAnalyticsUrl = new URL(
+  'https://www.googletagmanager.com/gtag/js'
+);
+
+googleAnalyticsUrl.searchParams.set('id', googleAnalyticsMeasurementId);
 ---
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y2B719Z5Q2"></script>
-<script is:inline>
-  window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag() {
-    window.dataLayer.push(arguments);
-  };
+{googleAnalyticsMeasurementId && (
+  <>
+    <script async src={googleAnalyticsUrl.toString()}></script>
+    <script is:inline define:vars={{ googleAnalyticsMeasurementId }}>
+      window.tastyfoodConfig = window.tastyfoodConfig || {};
+      window.tastyfoodConfig.googleAnalyticsMeasurementId =
+        googleAnalyticsMeasurementId;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag() {
+        window.dataLayer.push(arguments);
+      };
 
-  window.gtag('js', new Date());
-  window.gtag('config', 'G-Y2B719Z5Q2');
-</script>
+      window.gtag('js', new Date());
+      window.gtag('config', googleAnalyticsMeasurementId);
+    </script>
+  </>
+)}

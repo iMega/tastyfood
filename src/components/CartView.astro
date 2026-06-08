@@ -2,7 +2,7 @@
 import { t, type Language } from '../lib/i18n';
 import { contact } from '../lib/contact';
 import { order } from '../lib/order';
-import { absoluteUrl, withBase } from '../lib/config';
+import { absoluteUrl, config, withBase } from '../lib/config';
 
 interface Props {
   lang: Language;
@@ -39,7 +39,7 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
         </div>
 
         <form class="cart-form" data-cart-form action="https://api.staticforms.dev/submit" method="POST">
-          <input type="hidden" name="accessKey" value="sf_5ab3ef599da9957fd0048681">
+          <input type="hidden" name="accessKey" value={config.staticFormsAccessKey}>
           <input type="hidden" name="redirectTo" value={redirectUrl}>
           <input type="hidden" name="subject" value="New order from Tastyfood">
           <input type="hidden" name="replyTo" value="@">

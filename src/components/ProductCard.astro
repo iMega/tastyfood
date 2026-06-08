@@ -158,10 +158,10 @@ const meta = [
     height: 100%;
     display: flex;
     flex-direction: column;
-    background: oklch(100% 0 0deg);
+    background: var(--surface);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 2px 8px oklch(0% 0 0deg / 8%);
+    box-shadow: 0 2px 8px var(--shadow-soft);
     transition: transform 0.2s, box-shadow 0.2s;
   }
 
@@ -171,7 +171,7 @@ const meta = [
 
   .product-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 8px 24px oklch(0% 0 0deg / 12%);
+    box-shadow: 0 8px 24px var(--shadow);
   }
 
   .badge {
@@ -211,7 +211,7 @@ const meta = [
     aspect-ratio: 16 / 9;
     color: inherit;
     text-decoration: none;
-    background: linear-gradient(180deg, oklch(100% 0 0deg) 0%, oklch(97.73% 0.0062 75.41deg) 76%, oklch(94.33% 0.0131 71.33deg) 100%);
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-muted) 100%);
     overflow: hidden;
   }
 
@@ -239,7 +239,7 @@ const meta = [
     font-size: 1.125rem;
     font-weight: 600;
     margin: 0;
-    color: oklch(31.68% 0.0309 274.23deg);
+    color: var(--text-cool);
     min-height: 2.75rem;
     line-height: 1.22;
     display: -webkit-box;
@@ -259,7 +259,7 @@ const meta = [
 
   .product-description {
     font-size: 0.875rem;
-    color: oklch(54.09% 0.0156 60.37deg);
+    color: var(--muted);
     margin: 0;
     line-height: 1.35;
     display: -webkit-box;
@@ -270,7 +270,7 @@ const meta = [
 
   .product-meta {
     font-size: 0.8125rem;
-    color: oklch(65.97% 0.0167 61.21deg);
+    color: var(--muted-soft);
     margin: 0;
     font-weight: 500;
   }
@@ -288,7 +288,7 @@ const meta = [
     display: flex;
     flex-direction: column;
     gap: 4px;
-    color: oklch(31.68% 0.0309 274.23deg);
+    color: var(--text-cool);
   }
 
   .product-price__value {
@@ -298,7 +298,7 @@ const meta = [
   }
 
   .product-price__note {
-    color: oklch(61.07% 0.018 58.46deg);
+    color: var(--muted-soft);
     font-size: 0.8125rem;
     font-weight: 600;
     line-height: 1.2;
@@ -311,7 +311,7 @@ const meta = [
     width: 42px;
     height: 42px;
     border-radius: 16px 0 0;
-    background: oklch(42.44% 0.0717 59.27deg);
+    background: var(--accent);
     border: none;
     color: oklch(100% 0 0deg);
     font-size: 1.25rem;
@@ -323,17 +323,17 @@ const meta = [
   }
 
   .add-to-cart:hover {
-    background: oklch(37.97% 0.0608 59.6deg);
+    background: var(--accent-hover);
   }
 
   .add-to-cart.is-in-cart {
-    background: oklch(52.89% 0.1056 154.41deg);
+    background: var(--success);
     font-size: 1rem;
     font-weight: 800;
   }
 
   .add-to-cart.is-in-cart:hover {
-    background: oklch(47.39% 0.093 154.83deg);
+    background: var(--success-hover);
   }
 
   .add-icon {
@@ -403,7 +403,7 @@ const meta = [
 
     .product-price__note {
       padding-bottom: 2px;
-      color: oklch(63.08% 0.0178 58.48deg);
+      color: var(--muted-soft);
     }
 
     .add-to-cart {

@@ -60,10 +60,17 @@ const results = await new PurgeCSS().purge({
   rejected: true,
 });
 
+const isExpectedSeasonalSelector = selector => {
+  return selector.startsWith('html[data-decoration=')
+    || selector.startsWith('html[data-theme=');
+};
+
 const findings = results
   .map(result => ({
     file: result.file,
-    selectors: [...new Set((result.rejected || []).map(selector => selector.trim()))],
+    selectors: [...new Set((result.rejected || [])
+      .map(selector => selector.trim())
+      .filter(selector => !isExpectedSeasonalSelector(selector)))],
   }))
   .filter(result => result.selectors.length > 0);
 

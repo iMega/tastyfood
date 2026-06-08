@@ -23,6 +23,31 @@
     "heading": "Domowe placki w Pafos",
     "intro": "Placki z mięsem, serem, kurczakiem i warzywami pieczone na zamówienie. Wybierz cały placek na wspólny posiłek."
   },
+  "seasonal": {
+    "aria": "Oferta sezonowa",
+    "promos": {
+      "holiday-menu": {
+        "title": "Świąteczne placki na stół",
+        "text": "Zamawiaj całe placki z wyprzedzeniem na rodzinne posiłki i zimowe spotkania."
+      },
+      "easter-table": {
+        "title": "Placki na wielkanocny stół",
+        "text": "Zamawiaj całe placki z wyprzedzeniem na wielkanocny stół na Cyprze."
+      },
+      "green-monday": {
+        "title": "Placki na Zielony Poniedziałek",
+        "text": "Wybierz placki warzywne i serowe na świeży wiosenny piknik."
+      },
+      "summer-menu": {
+        "title": "Letnie placki do wspólnego stołu",
+        "text": "Zamawiaj całe placki na plażowe dni, gości i ciepłe wieczory."
+      },
+      "harvest-menu": {
+        "title": "Placki sezonu zbiorów",
+        "text": "Ciepłe placki z bogatym nadzieniem na jesienne spotkania w Pafos."
+      }
+    }
+  },
   "product": {
     "add_to_cart": "Dodaj do koszyka",
     "whole_pie": "cały placek",

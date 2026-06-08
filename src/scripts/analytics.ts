@@ -32,6 +32,9 @@ type Order = {
 declare global {
   interface Window {
     gtag?: Gtag;
+    tastyfoodConfig?: {
+      googleAnalyticsMeasurementId?: string;
+    };
     tastyfoodAnalytics: {
       track: (name: string, params?: Record<string, unknown>) => void;
       productFrom: (element: Element) => Product;
@@ -52,7 +55,10 @@ declare global {
 
 const orderKey = 'tastyfood-pending-order';
 const sentPurchasePrefix = 'tastyfood-purchase-sent:';
-const measurementId = 'G-Y2B719Z5Q2';
+
+const measurementId = () => {
+  return window.tastyfoodConfig?.googleAnalyticsMeasurementId || '';
+};
 
 const language = () => {
   return document.documentElement.lang || 'en';
@@ -67,9 +73,15 @@ const track = (name: string, params: Record<string, unknown> = {}) => {
     return;
   }
 
+  const id = measurementId();
+
+  if (!id) {
+    return;
+  }
+
   window.gtag('event', name, {
     language: language(),
-    send_to: measurementId,
+    send_to: id,
     debug_mode: debugMode(),
     ...params,
   });

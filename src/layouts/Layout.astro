@@ -20,10 +20,19 @@ const {
   noindex = true,
   footer = true,
 } = Astro.props;
+
+const theme = import.meta.env.PUBLIC_SITE_THEME ?? 'default';
+const decoration = import.meta.env.PUBLIC_SITE_DECORATION ?? 'none';
+const promo = import.meta.env.PUBLIC_SITE_PROMO ?? 'none';
 ---
 
 <!DOCTYPE html>
-<html lang={lang}>
+<html
+  lang={lang}
+  data-theme={theme}
+  data-decoration={decoration}
+  data-promo={promo}
+>
   <head>
     <GoogleAnalytics />
     <meta charset="UTF-8">

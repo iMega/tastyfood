@@ -23,6 +23,31 @@
     "heading": "Homemade pies in Paphos",
     "intro": "Meat, cheese, chicken and vegetable pies baked to order. Choose a whole pie for a shared meal."
   },
+  "seasonal": {
+    "aria": "Seasonal offer",
+    "promos": {
+      "holiday-menu": {
+        "title": "Holiday pies for the table",
+        "text": "Order whole pies in advance for family meals and winter gatherings."
+      },
+      "easter-table": {
+        "title": "Easter pies for family meals",
+        "text": "Order whole pies in advance for the Easter table in Cyprus."
+      },
+      "green-monday": {
+        "title": "Green Monday pies and vegetarian fillings",
+        "text": "Choose vegetable and cheese pies for a fresh spring picnic table."
+      },
+      "summer-menu": {
+        "title": "Summer pies for easy shared meals",
+        "text": "Order whole pies ahead for beach days, guests and warm evenings."
+      },
+      "harvest-menu": {
+        "title": "Harvest season pies",
+        "text": "Warm pies with rich fillings for autumn gatherings in Paphos."
+      }
+    }
+  },
   "product": {
     "add_to_cart": "Add to cart",
     "whole_pie": "whole pie",

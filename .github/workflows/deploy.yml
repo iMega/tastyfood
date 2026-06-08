@@ -4,6 +4,53 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      theme:
+        description: Site theme
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - default
+          - christmas
+          - easter
+          - green-monday
+          - summer
+          - autumn
+          - harvest
+      decoration:
+        description: Decorative layer
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - none
+          - snow
+          - spring
+          - sun
+          - harvest
+      promo:
+        description: Promotional content
+        required: true
+        default: auto
+        type: choice
+        options:
+          - auto
+          - none
+          - holiday-menu
+          - easter-table
+          - green-monday
+          - summer-menu
+          - harvest-menu
+  schedule:
+    - cron: "0 3 8 1 *"
+    - cron: "0 3 * 2-5 *"
+    - cron: "0 3 1 6 *"
+    - cron: "0 3 1 9 *"
+    - cron: "0 3 1 11 *"
+    - cron: "0 3 1 12 *"
 
 permissions:
   contents: read
@@ -21,7 +68,112 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-      - run: npm run build
+      - name: Set seasonal theme
+        env:
+          INPUT_THEME: ${{ github.event.inputs.theme || 'auto' }}
+          INPUT_DECORATION: ${{ github.event.inputs.decoration || 'auto' }}
+          INPUT_PROMO: ${{ github.event.inputs.promo || 'auto' }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+
+          const parts = new Intl.DateTimeFormat('en-CA', {
+            timeZone: 'Asia/Nicosia',
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          }).formatToParts(new Date());
+          const part = name => Number(parts.find(item => {
+            return item.type === name;
+          }).value);
+          const year = part('year');
+          const month = part('month');
+          const day = part('day');
+          const orthodoxEaster = year => {
+            const a = year % 4;
+            const b = year % 7;
+            const c = year % 19;
+            const d = (19 * c + 15) % 30;
+            const e = (2 * a + 4 * b - d + 34) % 7;
+            const month = Math.floor((d + e + 114) / 31);
+            const day = ((d + e + 114) % 31) + 1;
+
+            return new Date(Date.UTC(year, month - 1, day + 13));
+          };
+          const today = new Date(Date.UTC(year, month - 1, day));
+          const daysBetween = target => {
+            return Math.round((today.getTime() - target.getTime()) / 86400000);
+          };
+          const easter = orthodoxEaster(year);
+          const greenMonday = new Date(easter);
+
+          greenMonday.setUTCDate(easter.getUTCDate() - 48);
+
+          let current = {
+            theme: 'default',
+            decoration: 'none',
+            promo: 'none',
+          };
+
+          if (month === 12 || (month === 1 && day <= 7)) {
+            current = {
+              theme: 'christmas',
+              decoration: 'snow',
+              promo: 'holiday-menu',
+            };
+          } else if (Math.abs(daysBetween(greenMonday)) <= 1) {
+            current = {
+              theme: 'green-monday',
+              decoration: 'spring',
+              promo: 'green-monday',
+            };
+          } else if (daysBetween(easter) >= -7 && daysBetween(easter) <= 2) {
+            current = {
+              theme: 'easter',
+              decoration: 'spring',
+              promo: 'easter-table',
+            };
+          } else if (month >= 6 && month <= 8) {
+            current = {
+              theme: 'summer',
+              decoration: 'sun',
+              promo: 'summer-menu',
+            };
+          } else if (month >= 9 && month <= 11) {
+            current = {
+              theme: 'autumn',
+              decoration: 'harvest',
+              promo: 'harvest-menu',
+            };
+          }
+
+          const input = {
+            theme: process.env.INPUT_THEME || 'auto',
+            decoration: process.env.INPUT_DECORATION || 'auto',
+            promo: process.env.INPUT_PROMO || 'auto',
+          };
+          const output = {
+            theme: input.theme === 'auto' ? current.theme : input.theme,
+            decoration: input.decoration === 'auto'
+              ? current.decoration
+              : input.decoration,
+            promo: input.promo === 'auto' ? current.promo : input.promo,
+          };
+          const env = [
+            `PUBLIC_SITE_THEME=${output.theme}`,
+            `PUBLIC_SITE_DECORATION=${output.decoration}`,
+            `PUBLIC_SITE_PROMO=${output.promo}`,
+          ].join('\n');
+
+          fs.appendFileSync(process.env.GITHUB_ENV, `${env}\n`);
+          console.log(env);
+          NODE
+      - name: Build
+        env:
+          GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.GOOGLE_ANALYTICS_MEASUREMENT_ID }}
+          GOOGLE_SEARCH_CONSOLE_VERIFICATION: ${{ secrets.GOOGLE_SEARCH_CONSOLE_VERIFICATION }}
+          STATICFORM: ${{ secrets.STATICFORM }}
+        run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

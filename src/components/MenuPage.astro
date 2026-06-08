@@ -18,6 +18,15 @@ interface Props {
 const { lang } = Astro.props;
 const menuItems = await getMenuItems();
 const categories = [...getCategories()].sort((a, b) => a.order - b.order);
+const promo = import.meta.env.PUBLIC_SITE_PROMO ?? 'none';
+const promoKeys = new Set([
+  'holiday-menu',
+  'easter-table',
+  'green-monday',
+  'summer-menu',
+  'harvest-menu',
+]);
+const promoKey = promoKeys.has(promo) ? promo : null;
 ---
 
 <Layout lang={lang} title={t(lang, 'menu.title')} alternatePath="/">
@@ -29,6 +38,17 @@ const categories = [...getCategories()].sort((a, b) => a.order - b.order);
         <h1 class="menu-intro__title">{t(lang, 'menu.heading')}</h1>
         <p class="menu-intro__text">{t(lang, 'menu.intro')}</p>
       </section>
+
+      {promoKey && (
+        <section class="season-banner" aria-label={t(lang, 'seasonal.aria')}>
+          <h2 class="season-banner__title">
+            {t(lang, `seasonal.promos.${promoKey}.title`)}
+          </h2>
+          <p class="season-banner__text">
+            {t(lang, `seasonal.promos.${promoKey}.text`)}
+          </p>
+        </section>
+      )}
 
       <div class="category-filters">
         {categories.map(category => {
