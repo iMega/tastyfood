@@ -2,14 +2,12 @@
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import AlternateLinks from '../components/AlternateLinks.astro';
 import Footer from '../components/Footer.astro';
-import { config } from '../lib/config';
 import '../styles/new-design.css';
 
 interface Props {
   lang?: string;
   title: string;
   alternatePath?: string | false;
-  noindex?: boolean;
   footer?: boolean;
 }
 
@@ -17,7 +15,6 @@ const {
   lang = 'en',
   title,
   alternatePath = false,
-  noindex = true,
   footer = true,
 } = Astro.props;
 
@@ -37,12 +34,6 @@ const promo = import.meta.env.PUBLIC_SITE_PROMO ?? 'none';
     <GoogleAnalytics />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {noindex && (
-      <meta name="robots" content="noindex, nofollow, noarchive">
-    )}
-    {config.googleSearchConsoleVerification && (
-      <meta name="google-site-verification" content={config.googleSearchConsoleVerification}>
-    )}
     {alternatePath !== false && <AlternateLinks path={alternatePath} />}
     <title>{title}</title>
     <slot name="head" />

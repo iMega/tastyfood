@@ -1,6 +1,5 @@
 import {
   googleAnalyticsMeasurementId,
-  googleSearchConsoleVerification,
   siteBase,
   siteUrl,
   staticFormsAccessKey,
@@ -21,7 +20,6 @@ export const absoluteUrl = (path = '/'): string => {
 
 export const config = {
   googleAnalyticsMeasurementId,
-  googleSearchConsoleVerification,
   siteBase,
   siteUrl,
   staticFormsAccessKey,

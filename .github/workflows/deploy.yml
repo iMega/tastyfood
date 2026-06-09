@@ -171,7 +171,6 @@ jobs:
       - name: Build
         env:
           GOOGLE_ANALYTICS_MEASUREMENT_ID: ${{ secrets.GOOGLE_ANALYTICS_MEASUREMENT_ID }}
-          GOOGLE_SEARCH_CONSOLE_VERIFICATION: ${{ secrets.GOOGLE_SEARCH_CONSOLE_VERIFICATION }}
           STATICFORM: ${{ secrets.STATICFORM }}
         run: npm run build
       - uses: actions/upload-pages-artifact@v3
