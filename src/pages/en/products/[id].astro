@@ -1,11 +1,14 @@
 ---
-import ProductPage from '../../../components/ProductPage.astro';
+import RedirectPage from '../../../components/RedirectPage.astro';
 import { defaultLanguage } from '../../../lib/i18n';
-import { getProductStaticPaths } from '../../../lib/productPaths';
+import {
+  getProductStaticPaths,
+  productPath,
+} from '../../../lib/productPaths';
 
 export const getStaticPaths = getProductStaticPaths;
 const { item } = Astro.props;
 const lang = defaultLanguage;
 ---
 
-<ProductPage item={item} lang={lang} />
+<RedirectPage to={productPath(item, lang)} />

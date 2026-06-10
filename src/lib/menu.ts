@@ -15,6 +15,7 @@ type MenuItemFile = Omit<MenuItem, 'image' | 'imageUrl'> & {
 
 export interface MenuItem {
   id: string;
+  url: MenuItemUrl;
   order: number;
   categoryId: string;
   categories: string[];
@@ -33,6 +34,11 @@ export interface MenuItem {
       description: string;
       details: ProductDetails;
   }>;
+}
+
+export interface MenuItemUrl {
+  section: string;
+  slug: string;
 }
 
 export interface ProductDetails {

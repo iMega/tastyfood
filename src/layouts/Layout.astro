@@ -2,11 +2,20 @@
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import AlternateLinks from '../components/AlternateLinks.astro';
 import Footer from '../components/Footer.astro';
+import {
+  jsonLd,
+  restaurantJsonLd,
+  type JsonLd,
+  type OpenGraph,
+} from '../lib/seo';
+import { absoluteUrl } from '../lib/config';
 import '../styles/new-design.css';
 
 interface Props {
   lang?: string;
   title: string;
+  structuredData?: JsonLd[];
+  openGraph?: OpenGraph;
   alternatePath?: string | false;
   footer?: boolean;
 }
@@ -14,10 +23,22 @@ interface Props {
 const {
   lang = 'en',
   title,
+  structuredData = [],
+  openGraph,
   alternatePath = false,
   footer = true,
 } = Astro.props;
 
+const allStructuredData = [restaurantJsonLd(), ...structuredData];
+const canonical = openGraph?.url || absoluteUrl(Astro.url.pathname);
+const description = openGraph?.description || title;
+const og = openGraph || {
+  title,
+  description,
+  image: absoluteUrl('/og/homepage.jpg'),
+  url: canonical,
+  type: 'website',
+};
 const theme = import.meta.env.PUBLIC_SITE_THEME ?? 'default';
 const decoration = import.meta.env.PUBLIC_SITE_DECORATION ?? 'none';
 const promo = import.meta.env.PUBLIC_SITE_PROMO ?? 'none';
@@ -36,6 +57,21 @@ const promo = import.meta.env.PUBLIC_SITE_PROMO ?? 'none';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {alternatePath !== false && <AlternateLinks path={alternatePath} />}
     <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="canonical" href={canonical}>
+    <meta name="robots" content="index,follow">
+    <meta property="og:type" content={og.type || 'website'}>
+    <meta property="og:title" content={og.title}>
+    <meta property="og:description" content={og.description}>
+    <meta property="og:image" content={og.image}>
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content={og.url}>
+    <meta name="twitter:card" content="summary_large_image">
+    <script
+      type="application/ld+json"
+      set:html={jsonLd(allStructuredData)}
+    />
     <slot name="head" />
   </head>
   <body>

@@ -1,0 +1,11 @@
+---
+import ProductPage from '../../../components/ProductPage.astro';
+import { getLocalizedProductStaticPaths } from '../../../lib/productPaths';
+import type { Language } from '../../../lib/i18n';
+import type { MenuItem } from '../../../lib/menu';
+
+export const getStaticPaths = getLocalizedProductStaticPaths;
+const { item, lang } = Astro.props as { item: MenuItem; lang: Language };
+---
+
+<ProductPage item={item} lang={lang} />

@@ -10,6 +10,8 @@ import {
   getLocalizedCategory,
 } from '../lib/menu';
 import { withBase } from '../lib/config';
+import { menuOpenGraph } from '../lib/seo';
+import { productPath } from '../lib/productPaths';
 
 interface Props {
   lang: Language;
@@ -29,7 +31,12 @@ const promoKeys = new Set([
 const promoKey = promoKeys.has(promo) ? promo : null;
 ---
 
-<Layout lang={lang} title={t(lang, 'menu.title')} alternatePath="/">
+<Layout
+  lang={lang}
+  title={t(lang, 'menu.title')}
+  openGraph={menuOpenGraph(lang)}
+  alternatePath="/"
+>
   <Navigation lang={lang} currentPage="menu" />
 
   <main class="main">
@@ -83,7 +90,7 @@ const promoKey = promoKeys.has(promo) ? promo : null;
               portions={item.portions}
               image={item.image}
               imageUrl={item.imageUrl}
-              href={withBase(`/${lang}/products/${item.id}`)}
+              href={withBase(productPath(item, lang))}
               categoryId={item.categoryId}
               categories={item.categories}
               badge={item.badge}

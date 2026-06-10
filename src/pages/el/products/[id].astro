@@ -1,10 +1,13 @@
 ---
-import ProductPage from '../../../components/ProductPage.astro';
-import { getProductStaticPaths } from '../../../lib/productPaths';
+import RedirectPage from '../../../components/RedirectPage.astro';
+import {
+  getProductStaticPaths,
+  productPath,
+} from '../../../lib/productPaths';
 
 export const getStaticPaths = getProductStaticPaths;
 const { item } = Astro.props;
 const lang = 'el';
 ---
 
-<ProductPage item={item} lang={lang} />
+<RedirectPage to={productPath(item, lang)} />

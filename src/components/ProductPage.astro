@@ -5,20 +5,33 @@ import ProductDetails from './ProductDetails.astro';
 import type { Language } from '../lib/i18n';
 import type { MenuItem } from '../lib/menu';
 import { getLocalizedMenuItem } from '../lib/menu';
+import {
+  breadcrumbJsonLd,
+  productJsonLd,
+  productOpenGraph,
+} from '../lib/seo';
+import { productPath } from '../lib/productPaths';
 
 interface Props {
   item: MenuItem;
   lang: Language;
+  path?: string;
 }
 
-const { item, lang } = Astro.props;
+const { item, lang, path = productPath(item, lang) } = Astro.props;
 const product = getLocalizedMenuItem(item, lang);
+const title = `${product.shortName} - Tastyfood`;
 ---
 
 <Layout
   lang={lang}
-  title={`${product.name} - Tastyfood`}
-  alternatePath={`/products/${item.id}`}
+  title={title}
+  structuredData={[
+    productJsonLd(item, lang, path),
+    breadcrumbJsonLd(item, lang, path),
+  ]}
+  openGraph={productOpenGraph(item, lang, path)}
+  alternatePath={productPath(item).replace(/^\/|\/$/g, '')}
 >
   <Navigation lang={lang} currentPage="menu" />
   <ProductDetails

@@ -335,5 +335,9 @@
         "note": "Ten produkt jest przygotowywany ręcznie. Wygląd i waga mogą się nieznacznie różnić."
       }
     }
+  },
+  "url": {
+    "section": "pies",
+    "slug": "meat"
   }
 }
