@@ -7,6 +7,7 @@ type Gtag = (
 type Product = {
   id: string | null;
   name: string | null;
+  orderName?: string | null;
   category?: string | null;
   variant?: string | null;
   price: number;
@@ -95,6 +96,7 @@ const productFrom = (element: Element): Product => {
   return {
     id: element.getAttribute('data-product-id'),
     name: element.getAttribute('data-product-name'),
+    orderName: element.getAttribute('data-product-order-name'),
     category: element.getAttribute('data-product-category'),
     variant: element.getAttribute('data-product-variant'),
     price: Number(element.getAttribute('data-product-price') || 0),

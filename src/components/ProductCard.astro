@@ -6,6 +6,7 @@ import type { MenuItem, ProductPrice } from '../lib/menu';
 interface Props {
   id: string;
   name: string;
+  orderName: string;
   shortName: string;
   cardDescription: string;
   locale: Language;
@@ -26,6 +27,7 @@ interface Props {
 const {
   id,
   name,
+  orderName,
   shortName,
   cardDescription,
   locale,
@@ -140,6 +142,7 @@ const meta = [
         data-cart-button
         data-product-id={id}
         data-product-name={name}
+        data-product-order-name={orderName}
         data-product-category={categoryId}
         data-product-variant={`${weight} g`}
         data-product-price={price.value}

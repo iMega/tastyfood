@@ -20,6 +20,7 @@ interface Props {
 
 const { item, lang, path = productPath(item, lang) } = Astro.props;
 const product = getLocalizedMenuItem(item, lang);
+const enProduct = getLocalizedMenuItem(item, 'en');
 const title = `${product.shortName} - Tastyfood`;
 ---
 
@@ -37,6 +38,7 @@ const title = `${product.shortName} - Tastyfood`;
   <ProductDetails
     id={item.id}
     name={product.name}
+    orderName={enProduct.name}
     image={item.image}
     imageUrl={item.imageUrl}
     categoryId={item.categoryId}

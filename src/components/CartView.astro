@@ -3,6 +3,7 @@ import { t, type Language } from '../lib/i18n';
 import { contact } from '../lib/contact';
 import { order } from '../lib/order';
 import { absoluteUrl, config, withBase } from '../lib/config';
+import { getMenuItems, getLocalizedMenuItem } from '../lib/menu';
 
 interface Props {
   lang: Language;
@@ -10,10 +11,14 @@ interface Props {
 
 const { lang } = Astro.props;
 const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
+const menuItems = await getMenuItems();
+const orderNames = Object.fromEntries(menuItems.map(item => {
+  return [item.id, getLocalizedMenuItem(item, 'en').name];
+}));
 ---
 
 <main class="main">
-  <section class="cart-page">
+  <section class="cart-page" data-order-names={JSON.stringify(orderNames)}>
     <h1 class="cart-title">{t(lang, 'cart.title')}</h1>
 
     <div class="cart-shell">
@@ -117,8 +122,12 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
   const userEmailField = document.querySelector('[data-user-email]');
   const userCommentField = document.querySelector('[data-user-comment]');
   const template = document.querySelector('[data-cart-item-template]');
+  const orderNamesElement = document.querySelector('[data-order-names]');
   const locale = document.documentElement.lang || 'en';
   const minPies = 3;
+  const orderNames = JSON.parse(
+    orderNamesElement?.getAttribute('data-order-names') || '{}'
+  );
 
   let currentOrderText = '';
   let didTrackViewCart = false;
@@ -145,6 +154,10 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
 
     window.tastyfoodAnalytics.viewCart(cart);
     didTrackViewCart = true;
+  };
+
+  const orderNameFor = item => {
+    return item.orderName || orderNames[item.id] || item.name;
   };
 
   const render = () => {
@@ -197,7 +210,7 @@ const redirectUrl = absoluteUrl(`/${lang}/thank-you/`);
 
     // Store order details for form submission
     const orderText = cart.map(item =>
-      `${item.name} x ${item.quantity} — ${formatPrice(item.price * item.quantity, item.currency)}`
+      `${orderNameFor(item)} x ${item.quantity} — ${formatPrice(item.price * item.quantity, item.currency)}`
     ).join('\n');
     currentOrderText = `ORDER:\n${orderText}\n\nTOTAL: ${formatPrice(sum)}`;
 

@@ -10,6 +10,7 @@ import type {
 interface Props {
   id: string;
   name: string;
+  orderName: string;
   image: MenuItem['image'];
   imageUrl: string;
   categoryId: string;
@@ -22,6 +23,7 @@ interface Props {
 const {
   id,
   name,
+  orderName,
   image,
   imageUrl,
   categoryId,
@@ -90,6 +92,7 @@ const allergenText = `${label('contains')}: ${details.allergens.join(', ')}`;
             data-product-detail-add
             data-product-id={id}
             data-product-name={name}
+            data-product-order-name={orderName}
             data-product-category={categoryId}
             data-product-variant={`${weight} g`}
             data-product-price={price.value}

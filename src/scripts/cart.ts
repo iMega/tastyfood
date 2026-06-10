@@ -4,6 +4,7 @@ import { order } from '../lib/order';
 type CartItem = {
   id: string;
   name: string;
+  orderName?: string | null;
   category?: string | null;
   variant?: string | null;
   price: number;
