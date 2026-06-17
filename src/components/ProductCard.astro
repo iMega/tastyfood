@@ -162,6 +162,7 @@ const meta = [
     display: flex;
     flex-direction: column;
     background: var(--surface);
+    color: var(--text);
     border-radius: 16px;
     overflow: hidden;
     box-shadow: 0 2px 8px var(--shadow-soft);
@@ -229,6 +230,8 @@ const meta = [
     flex: 1;
     display: flex;
     flex-direction: column;
+    background: var(--surface);
+    color: var(--text);
     padding: 14px 14px 0;
   }
 
@@ -262,7 +265,7 @@ const meta = [
 
   .product-description {
     font-size: 0.875rem;
-    color: var(--muted);
+    color: var(--text-soft);
     margin: 0;
     line-height: 1.35;
     display: -webkit-box;
@@ -273,7 +276,7 @@ const meta = [
 
   .product-meta {
     font-size: 0.8125rem;
-    color: var(--muted-soft);
+    color: var(--text-muted);
     margin: 0;
     font-weight: 500;
   }
@@ -301,7 +304,7 @@ const meta = [
   }
 
   .product-price__note {
-    color: var(--muted-soft);
+    color: var(--text-muted);
     font-size: 0.8125rem;
     font-weight: 600;
     line-height: 1.2;
@@ -316,7 +319,7 @@ const meta = [
     border-radius: 16px 0 0;
     background: var(--accent);
     border: none;
-    color: oklch(100% 0 0deg);
+    color: var(--accent-text);
     font-size: 1.25rem;
     cursor: pointer;
     display: flex;
@@ -406,7 +409,7 @@ const meta = [
 
     .product-price__note {
       padding-bottom: 2px;
-      color: var(--muted-soft);
+      color: var(--text-muted);
     }
 
     .add-to-cart {

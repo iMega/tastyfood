@@ -28,7 +28,12 @@ const orderNames = Object.fromEntries(menuItems.map(item => {
         <div class="cart-empty" data-cart-empty hidden>
           <p class="cart-empty__title">{t(lang, 'cart.empty')}</p>
           <p class="cart-empty__text">{t(lang, 'cart.empty_message')}</p>
-          <a href={withBase(`/${lang}/`)} class="cart-empty__button">{t(lang, 'cart.back_to_menu')}</a>
+          <a
+            href={withBase(`/${lang}/`)}
+            class="btn btn--primary btn--content cart-empty__button"
+          >
+            {t(lang, 'cart.back_to_menu')}
+          </a>
         </div>
       </div>
 
@@ -39,7 +44,9 @@ const orderNames = Object.fromEntries(menuItems.map(item => {
         </div>
 
         <div class="cart-summary__info">
-          <p class="cart-summary__min-order">{t(lang, 'cart.min_order_note')}</p>
+          <p class="cart-summary__min-order form-note">
+            {t(lang, 'cart.min_order_note')}
+          </p>
           <p class="cart-summary__text">{t(lang, 'cart.pickup_at')} {contact.address}</p>
         </div>
 
@@ -82,7 +89,13 @@ const orderNames = Object.fromEntries(menuItems.map(item => {
             rows="3"
           ></textarea>
 
-          <button type="submit" class="cart-form__submit" data-submit-button>
+          <button
+            type="submit"
+            class="btn btn--primary btn--full cart-form__submit"
+            data-submit-button
+            aria-disabled="true"
+            disabled
+          >
             {t(lang, 'cart.order_form.submit')}
           </button>
         </form>
@@ -216,7 +229,9 @@ const orderNames = Object.fromEntries(menuItems.map(item => {
 
     // Enable/disable submit button based on minimum order
     if (submitButton) {
-      submitButton.disabled = totalQuantity < minPies;
+      const isDisabled = totalQuantity < minPies;
+      submitButton.disabled = isDisabled;
+      submitButton.setAttribute('aria-disabled', String(isDisabled));
     }
 
     trackCartOpen(cart);

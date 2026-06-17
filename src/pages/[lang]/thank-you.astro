@@ -28,7 +28,10 @@ const title = `${t(lang, 'thank_you.title')} - Tastyfood`;
         {t(lang, 'thank_you.message')}
       </p>
 
-      <a class="thank-you-action" href={withBase(`/${lang}/`)}>
+      <a
+        class="btn btn--primary btn--content thank-you-action"
+        href={withBase(`/${lang}/`)}
+      >
         {t(lang, 'thank_you.back_to_menu')}
       </a>
     </section>
