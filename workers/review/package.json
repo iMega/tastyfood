@@ -4,8 +4,8 @@
   "type": "module",
   "scripts": {
     "build": "echo \"No build step required\"",
-    "deploy": "wrangler deploy",
-    "dev": "wrangler dev"
+    "deploy": "wrangler deploy --config wrangler.jsonc",
+    "dev": "wrangler dev --config wrangler.jsonc"
   },
   "devDependencies": {
     "wrangler": "^4.0.0"
