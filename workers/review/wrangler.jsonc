@@ -8,4 +8,8 @@
             "zone_name": "tastyfood.menu",
         },
     ],
+    "vars": {
+        "GOOGLE_REVIEW_URL": "https://g.page/r/CYqHbffzrvLcECA/review",
+        "GA4_MEASUREMENT_ID": "G-QZS2W0D0YM",
+    },
 }
