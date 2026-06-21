@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "echo \"No build step required.\"",
+    "build": "echo \"No build step required\"",
     "deploy": "wrangler deploy --config wrangler.jsonc",
     "dev": "wrangler dev --config wrangler.jsonc"
   },
