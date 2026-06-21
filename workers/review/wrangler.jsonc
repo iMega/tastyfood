@@ -2,4 +2,13 @@
     "name": "review-rdr-v1",
     "main": "index.js",
     "compatibility_date": "2026-06-21",
+    "routes": [
+        {
+            "pattern": "tastyfood.menu/r/*",
+            "zone_name": "tastyfood.menu",
+        },
+    ],
+    "vars": {
+        "GOOGLE_REVIEW_URL": "https://g.page/r/CYqHbffzrvLcECA/review",
+    },
 }
