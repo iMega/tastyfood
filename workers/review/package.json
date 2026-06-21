@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build": "echo \"No build step required\"",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev"
   },
